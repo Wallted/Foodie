@@ -11,19 +11,14 @@ using Foodie.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Security.Cryptography.X509Certificates;
-using System.IO;
-using System;
 
 namespace Foodie
 {
     public class Startup
     {
-        private bool isDev = false;
-        public Startup(IConfiguration configuration, IWebHostEnvironment env)
+        public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            isDev = env.IsDevelopment();
         }
 
         public IConfiguration Configuration { get; }
@@ -38,17 +33,8 @@ namespace Foodie
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            //if (isDev)
-            //{
-            //    services.AddIdentityServer()
-            //                    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
-            //}
-            //else
-            //{
             services.AddIdentityServer()
-                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>()
-                .AddSigningCredential(LoadCertificate());
-            //}
+                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();
@@ -108,26 +94,6 @@ namespace Foodie
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
-        }
-
-        private X509Certificate2 LoadCertificate()
-        {
-            X509Store certStore = new X509Store(StoreName.My, StoreLocation.CurrentUser);
-            certStore.Open(OpenFlags.ReadOnly);
-            X509Certificate2Collection certCollection = certStore.Certificates.Find(
-                                        X509FindType.FindByThumbprint,
-                                        // Replace below with your certificate's thumbprint
-                                        "B1AF35BBA0C73A4B5FC00802DB34FE4B654DCFE8",
-                                        false);
-            // Get the first cert with the thumbprint
-            //if (certCollection.Count > 0)
-            //{
-                X509Certificate2 cert = certCollection[0];
-                Console.WriteLine(cert.FriendlyName);
-                return cert;
-                // Use certificate
-            //}
-            certStore.Close();
         }
     }
 }
