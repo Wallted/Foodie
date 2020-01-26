@@ -11,14 +11,18 @@ using Foodie.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Security.Cryptography.X509Certificates;
+using System.IO;
 
 namespace Foodie
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private bool isDev = false;
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            isDev = env.IsDevelopment();
         }
 
         public IConfiguration Configuration { get; }
@@ -33,8 +37,17 @@ namespace Foodie
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddIdentityServer()
-                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+            if (isDev)
+            {
+                services.AddIdentityServer()
+                                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+            }
+            else
+            {
+                services.AddIdentityServer()
+                    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>()
+                    .AddSigningCredential(LoadCertificate());
+            }
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();
@@ -94,6 +107,33 @@ namespace Foodie
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+        }
+
+        private X509Certificate2 LoadCertificate()
+        {
+            X509Certificate2 cert = null;
+            using (X509Store certStore = new X509Store(StoreName.My, StoreLocation.CurrentUser))
+            {
+                certStore.Open(OpenFlags.ReadOnly);
+                X509Certificate2Collection certCollection = certStore.Certificates.Find(
+                    X509FindType.FindByThumbprint,
+                    // Replace below with your cert's thumbprint
+                    "9996C6320B38C65743D1B06B6A7EC0D43CD1CAD5",
+                    false);
+                // Get the first cert with the thumbprint
+                if (certCollection.Count > 0)
+                {
+                    cert = certCollection[0];
+                    //Log.Logger.Information($"Successfully loaded cert from registry: {cert.Thumbprint}");
+                }
+            }
+
+            // Fallback to local file for development
+            if (cert == null)
+            {
+                throw new FileNotFoundException("NIE MA PLICZKU");
+            }
+            return cert;
         }
     }
 }
