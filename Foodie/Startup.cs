@@ -38,17 +38,17 @@ namespace Foodie
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            if (isDev)
-            {
-                services.AddIdentityServer()
-                                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
-            }
-            else
-            {
-                services.AddIdentityServer()
-                    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>()
-                    .AddSigningCredential(LoadCertificate());
-            }
+            //if (isDev)
+            //{
+            //    services.AddIdentityServer()
+            //                    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+            //}
+            //else
+            //{
+            services.AddIdentityServer()
+                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>()
+                .AddSigningCredential(LoadCertificate());
+            //}
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();
@@ -117,7 +117,7 @@ namespace Foodie
             X509Certificate2Collection certCollection = certStore.Certificates.Find(
                                         X509FindType.FindByThumbprint,
                                         // Replace below with your certificate's thumbprint
-                                        "9996C6320B38C65743D1B06B6A7EC0D43CD1CAD5",
+                                        "B1AF35BBA0C73A4B5FC00802DB34FE4B654DCFE8",
                                         false);
             // Get the first cert with the thumbprint
             //if (certCollection.Count > 0)
