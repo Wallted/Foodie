@@ -18,7 +18,7 @@ namespace Foodie
             {
                 CreateWebHostBuilder(args).Build().Run();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Log.Error(ex, ex.Message);
             }
@@ -26,6 +26,10 @@ namespace Foodie
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .ConfigureLogging(logging =>
+                 {
+                     logging.AddAzureWebAppDiagnostics();
+                 })
                 .UseStartup<Startup>();
     }
 }
