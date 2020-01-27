@@ -11,6 +11,7 @@ using Foodie.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 
 namespace Foodie
 {
@@ -19,6 +20,10 @@ namespace Foodie
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.Console()
+                .WriteTo.File("..\\log-.txt", rollingInterval: RollingInterval.Day)
+                .CreateLogger();
         }
 
         public IConfiguration Configuration { get; }
@@ -35,7 +40,7 @@ namespace Foodie
 
             services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
-
+            
             services.AddAuthentication()
                 .AddIdentityServerJwt();
             services.AddControllersWithViews();
@@ -70,7 +75,6 @@ namespace Foodie
             }
 
             app.UseRouting();
-
             app.UseAuthentication();
             app.UseIdentityServer();
             app.UseAuthorization();
