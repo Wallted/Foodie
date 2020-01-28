@@ -4,14 +4,16 @@ using Foodie.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Foodie.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200127141412_MealsMigration")]
+    partial class MealsMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -97,9 +99,6 @@ namespace Foodie.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("MealId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("ProductId")
                         .HasColumnType("int");
 
@@ -107,8 +106,6 @@ namespace Foodie.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MealId");
 
                     b.HasIndex("ProductId");
 
@@ -379,10 +376,6 @@ namespace Foodie.Data.Migrations
 
             modelBuilder.Entity("Foodie.Models.Ingriedient", b =>
                 {
-                    b.HasOne("Foodie.Models.Meal", null)
-                        .WithMany("Ingriedients")
-                        .HasForeignKey("MealId");
-
                     b.HasOne("Foodie.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId");
