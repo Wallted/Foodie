@@ -90,7 +90,6 @@ namespace Foodie.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-<<<<<<< HEAD
             modelBuilder.Entity("Foodie.Models.Ingriedient", b =>
                 {
                     b.Property<int>("Id")
@@ -134,8 +133,6 @@ namespace Foodie.Data.Migrations
                     b.ToTable("Meals");
                 });
 
-=======
->>>>>>> cfd0cf5bbf3e6331eb0ef574ece28337e7c616a1
             modelBuilder.Entity("Foodie.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -143,7 +140,6 @@ namespace Foodie.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-<<<<<<< HEAD
                     b.Property<double>("Carbs")
                         .HasColumnType("float");
 
@@ -159,11 +155,6 @@ namespace Foodie.Data.Migrations
                     b.Property<double>("Protein")
                         .HasColumnType("float");
 
-=======
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
->>>>>>> cfd0cf5bbf3e6331eb0ef574ece28337e7c616a1
                     b.HasKey("Id");
 
                     b.ToTable("Products");
