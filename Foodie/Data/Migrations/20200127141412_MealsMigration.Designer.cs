@@ -4,14 +4,16 @@ using Foodie.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Foodie.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200127141412_MealsMigration")]
+    partial class MealsMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -90,16 +92,12 @@ namespace Foodie.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-<<<<<<< HEAD
             modelBuilder.Entity("Foodie.Models.Ingriedient", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("MealId")
-                        .HasColumnType("int");
 
                     b.Property<int?>("ProductId")
                         .HasColumnType("int");
@@ -108,8 +106,6 @@ namespace Foodie.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MealId");
 
                     b.HasIndex("ProductId");
 
@@ -134,8 +130,6 @@ namespace Foodie.Data.Migrations
                     b.ToTable("Meals");
                 });
 
-=======
->>>>>>> cfd0cf5bbf3e6331eb0ef574ece28337e7c616a1
             modelBuilder.Entity("Foodie.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -143,7 +137,6 @@ namespace Foodie.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-<<<<<<< HEAD
                     b.Property<double>("Carbs")
                         .HasColumnType("float");
 
@@ -159,11 +152,6 @@ namespace Foodie.Data.Migrations
                     b.Property<double>("Protein")
                         .HasColumnType("float");
 
-=======
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
->>>>>>> cfd0cf5bbf3e6331eb0ef574ece28337e7c616a1
                     b.HasKey("Id");
 
                     b.ToTable("Products");
@@ -388,10 +376,6 @@ namespace Foodie.Data.Migrations
 
             modelBuilder.Entity("Foodie.Models.Ingriedient", b =>
                 {
-                    b.HasOne("Foodie.Models.Meal", null)
-                        .WithMany("Ingriedients")
-                        .HasForeignKey("MealId");
-
                     b.HasOne("Foodie.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId");

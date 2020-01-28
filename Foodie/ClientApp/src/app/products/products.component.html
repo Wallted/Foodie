@@ -1,0 +1,22 @@
+<p>Products</p>
+
+<p *ngIf="!products"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="products">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Protein</th>
+            <th>Fat</th>
+            <th>Carbs</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of products">
+            <td>{{ product.name }}</td>
+            <td>{{ product.protein }}</td>
+            <td>{{ product.fat }}</td>
+            <td>{{ product.carbs }}</td>
+        </tr>
+    </tbody>
+</table>

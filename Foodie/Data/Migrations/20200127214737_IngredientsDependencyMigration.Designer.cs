@@ -4,14 +4,16 @@ using Foodie.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Foodie.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200127214737_IngredientsDependencyMigration")]
+    partial class IngredientsDependencyMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -90,7 +92,6 @@ namespace Foodie.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-<<<<<<< HEAD
             modelBuilder.Entity("Foodie.Models.Ingriedient", b =>
                 {
                     b.Property<int>("Id")
@@ -134,8 +135,6 @@ namespace Foodie.Data.Migrations
                     b.ToTable("Meals");
                 });
 
-=======
->>>>>>> cfd0cf5bbf3e6331eb0ef574ece28337e7c616a1
             modelBuilder.Entity("Foodie.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -143,7 +142,6 @@ namespace Foodie.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-<<<<<<< HEAD
                     b.Property<double>("Carbs")
                         .HasColumnType("float");
 
@@ -159,11 +157,6 @@ namespace Foodie.Data.Migrations
                     b.Property<double>("Protein")
                         .HasColumnType("float");
 
-=======
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
->>>>>>> cfd0cf5bbf3e6331eb0ef574ece28337e7c616a1
                     b.HasKey("Id");
 
                     b.ToTable("Products");

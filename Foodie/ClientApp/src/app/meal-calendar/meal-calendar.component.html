@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="date mb-5">
+        <button mat-icon-button (click)="changeDays(-1)">
+            <i class="material-icons">keyboard_arrow_left</i>
+        </button> {{day | date}}
+        <button mat-icon-button (click)="changeDays(1)">
+            <i class="material-icons">keyboard_arrow_right</i>
+        </button>
+    </div>
+    <div *ngIf="fetchingData" class="spinner mt-5">
+        <mat-spinner [diameter]="360"></mat-spinner>
+    </div>
+    <div *ngIf="!fetchingData">
+        <mat-accordion>
+            <mat-expansion-panel *ngFor="let meal of meals; let i = index" [style.background-color]="meal.color">
+                <mat-expansion-panel-header [expandedHeight]="'80px'" [collapsedHeight]="'70px'">
+                    <mat-panel-title>
+                        <mat-form-field mb-5>
+                            <input matInput value="{{meal.name}}" autocomplete="off">
+                        </mat-form-field>
+                    </mat-panel-title>
+                    <mat-panel-description class="container date">
+                        Meal no. {{i+1}}
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <mat-table [dataSource]="meal.ingriedients" class="mat-elevation-z8" *ngIf="meal.ingriedients">
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="name">
+                        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.product.name}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="quantity">
+                        <mat-header-cell *matHeaderCellDef> Quantity (g)</mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.quantity}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="protein">
+                        <mat-header-cell *matHeaderCellDef> Protein (g)</mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.product.protein}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="fat">
+                        <mat-header-cell *matHeaderCellDef> Fat (g)</mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.product.fat}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="carb">
+                        <mat-header-cell *matHeaderCellDef> Carb (g)</mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.product.carb}} </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+                <button mat-button (click)="addIngriedient(meal)" class="mt-3">Add new ingriedient</button>
+            </mat-expansion-panel>
+            <button mat-button (click)="addMeal()" class="mt-3">Add new meal</button>
+        </mat-accordion>
+    </div>
+</div>
