@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Microsoft.Extensions.Logging;
+using Foodie.Services;
 
 namespace Foodie
 {
@@ -30,6 +31,9 @@ namespace Foodie
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IProductsService, ProductsService>();
+            services.AddTransient<IMealsService, MealsService>();
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));

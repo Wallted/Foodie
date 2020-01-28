@@ -6,6 +6,9 @@ import { LogoutComponent } from './logout/logout.component';
 import { RouterModule } from '@angular/router';
 import { ApplicationPaths } from './api-authorization.constants';
 import { HttpClientModule } from '@angular/common/http';
+import { MealCalendarComponent } from 'src/app/meal-calendar/meal-calendar.component';
+import { ProductsComponent } from 'src/app/products/products.component';
+import { AuthorizeGuard } from './authorize.guard';
 
 @NgModule({
   imports: [
@@ -20,7 +23,11 @@ import { HttpClientModule } from '@angular/common/http';
         { path: ApplicationPaths.LoginCallback, component: LoginComponent },
         { path: ApplicationPaths.LogOut, component: LogoutComponent },
         { path: ApplicationPaths.LoggedOut, component: LogoutComponent },
-        { path: ApplicationPaths.LogOutCallback, component: LogoutComponent }
+        { path: ApplicationPaths.LogOutCallback, component: LogoutComponent },
+        { path: "mealcalendar", component: MealCalendarComponent, canActivate: [AuthorizeGuard] },
+        { path: 'products', component: ProductsComponent, canActivate: [AuthorizeGuard] },
+
+        
       ]
     )
   ],

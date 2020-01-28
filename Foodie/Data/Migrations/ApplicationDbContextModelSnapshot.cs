@@ -38,6 +38,9 @@ namespace Foodie.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<double>("KcalDemand")
+                        .HasColumnType("float");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -71,6 +74,9 @@ namespace Foodie.Data.Migrations
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
+                    b.Property<double>("Weight")
+                        .HasColumnType("float");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -84,6 +90,49 @@ namespace Foodie.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Foodie.Models.Ingriedient", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("MealId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MealId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Ingriedients");
+                });
+
+            modelBuilder.Entity("Foodie.Models.Meal", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Meals");
+                });
+
             modelBuilder.Entity("Foodie.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -91,8 +140,20 @@ namespace Foodie.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<double>("Carbs")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Fat")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("IsLiquid")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Protein")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -314,6 +375,17 @@ namespace Foodie.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Foodie.Models.Ingriedient", b =>
+                {
+                    b.HasOne("Foodie.Models.Meal", null)
+                        .WithMany("Ingriedients")
+                        .HasForeignKey("MealId");
+
+                    b.HasOne("Foodie.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
