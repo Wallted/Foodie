@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Foodie.Models;
 using Foodie.Services;
@@ -16,15 +17,23 @@ namespace Foodie.Controllers
             _mealsService = mealsService;
         }
         [HttpPost]
-        public void Add([FromBody] Meal meal)
+        public int Add([FromBody] Meal meal)
         {
-            _mealsService.AddMeal(meal);
+            var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.NameIdentifier).FirstOrDefault().Value;
+            return _mealsService.AddMeal(meal, userId);
         }
 
         [HttpGet("{controller}/{action}/{date}")]
         public IEnumerable<Meal> Get([FromRoute] DateTime date)
         {
-            return _mealsService.GetAllMealsFromSpecificDay(date);
+            var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.NameIdentifier).FirstOrDefault().Value;
+            return _mealsService.GetAllMealsFromSpecificDay(date, userId);
+        }
+
+        [HttpDelete("{controller}/{action}/{id}")]
+        public void Delete([FromRoute] int id)
+        {
+            _mealsService.DeleteMeal(id);
         }
 
         [HttpGet]

@@ -9,5 +9,6 @@ namespace Foodie.Models
         public string Name { get; set; }
         public DateTime Date { get; set; }
         public List<Ingriedient> Ingriedients { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }

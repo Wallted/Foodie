@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Foodie.Data;
 using Foodie.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Foodie.Services
 {
@@ -14,15 +15,20 @@ namespace Foodie.Services
         {
             _dbContext = applicationDbContext;
         }
-        public void AddMeal(Meal meal)
+        public int AddMeal(Meal meal, string userId)
         {
+            var user = _dbContext.Users.FirstOrDefault(x => x.Id == userId);
+            meal.User = user;
             _dbContext.Meals.Add(meal);
             _dbContext.SaveChanges();
+            return meal.Id;
         }
 
         public void DeleteMeal(int mealId)
         {
-            throw new NotImplementedException();
+            var mealToDelete = _dbContext.Meals.Include(r=>r.Ingriedients).SingleOrDefault(x => x.Id == mealId);
+            _dbContext.Remove(mealToDelete);
+            _dbContext.SaveChanges();
         }
 
         public IEnumerable<Meal> GetAllMeals()
@@ -30,9 +36,9 @@ namespace Foodie.Services
             return _dbContext.Meals.ToList();
         }
 
-        public IEnumerable<Meal> GetAllMealsFromSpecificDay(DateTime date)
+        public IEnumerable<Meal> GetAllMealsFromSpecificDay(DateTime date, string userId)
         {
-            var list = _dbContext.Meals.Where(x => x.Date.Day == date.Day).ToList();
+            var list = _dbContext.Meals.Include(u=>u.User).Include(r => r.Ingriedients).ThenInclude(x=>x.Product).Where(x => x.Date.Day == date.Day && x.User.Id == userId);
             return list;
         }
 

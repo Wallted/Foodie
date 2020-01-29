@@ -8,10 +8,10 @@ namespace Foodie.Services
 {
     public interface IMealsService
     {
-        public void AddMeal(Meal meal);
+        public int AddMeal(Meal meal, string userId);
         public Meal GetMeal(int mealId);
         public IEnumerable<Meal> GetAllMeals();
-        public IEnumerable<Meal> GetAllMealsFromSpecificDay(DateTime date);
+        public IEnumerable<Meal> GetAllMealsFromSpecificDay(DateTime date, string userId);
         public void UpdateMeal(Meal meal);
         public void DeleteMeal(int mealId);
     }

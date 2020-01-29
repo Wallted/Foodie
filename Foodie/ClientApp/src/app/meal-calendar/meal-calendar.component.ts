@@ -25,15 +25,15 @@ export class MealCalendarComponent implements OnInit {
   ngOnInit() {
   }
 
-  getData(){
-    this.fetchingData=true;
-    this.mealService.getMealsFromDay(this.day).subscribe((result)=>{
-      this.meals=result.map(function(meal){
-        var color = Math.floor(Math.random() * 360) + 1  
+  getData() {
+    this.fetchingData = true;
+    this.mealService.getMealsFromDay(this.day).subscribe((result) => {
+      this.meals = result.map(function (meal) {
+        var color = Math.floor(Math.random() * 360) + 1
         meal.color = 'hsl(' + color + ', 100%, 80%)'
         return meal;
       });
-      this.fetchingData=false;
+      this.fetchingData = false;
     })
   }
 
@@ -42,26 +42,32 @@ export class MealCalendarComponent implements OnInit {
     this.getData();
   }
 
-  addMeal(){
-    var meal : Meal = {name: "", date: this.day, ingriedients: new Array<Ingriedient>(), color: this.getRandomColor()};
+  addMeal() {
+    var meal: Meal = { id: 0, name: "", date: this.day, ingriedients: new Array<Ingriedient>(), color: this.getRandomColor() };
     console.log(meal)
     this.meals.push(meal)
-    this.mealService.addMeal(meal).subscribe();
+    this.mealService.addMeal(meal).subscribe((result) => {
+      meal.id = result;
+    });
   }
 
   getRandomColor() {
-    var color = Math.floor(Math.random() * 360) + 1  
+    var color = Math.floor(Math.random() * 360) + 1
     return 'hsl(' + color + ', 100%, 80%)'
   }
 
-  addIngriedient(meal: Meal){
+  addIngriedient(meal: Meal) {
     const dialogRef = this.dialog.open(IngriedientDialogComponent, {
       width: '250px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
-        meal.ingriedients.push(result);
-        meal.ingriedients = [...meal.ingriedients]
+      meal.ingriedients.push(result);
+      meal.ingriedients = [...meal.ingriedients]
+      result.mealId=meal.id;
+      this.mealService.addIngriedient(result).subscribe((resultID) => {
+        result.id = resultID;
+      })
     });
   }
 }

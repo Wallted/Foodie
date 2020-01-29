@@ -33,6 +33,7 @@ namespace Foodie
         {
             services.AddTransient<IProductsService, ProductsService>();
             services.AddTransient<IMealsService, MealsService>();
+            services.AddTransient<IIngriedientsService, IngriedientService>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
