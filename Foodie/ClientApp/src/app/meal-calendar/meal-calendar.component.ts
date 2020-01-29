@@ -81,7 +81,7 @@ export class MealCalendarComponent implements OnInit {
   }
 
   removeIngriedient(meal: Meal, ingriedientId: number){
-    var index = meal.ingriedients.findIndex(x=>x.id = ingriedientId);
+    var index = meal.ingriedients.findIndex(x=>x.id == ingriedientId);
     meal.ingriedients.splice(index, 1);
     this.mealService.deleteIngriedient(ingriedientId).subscribe((result)=>{
       // this.getData();
