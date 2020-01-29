@@ -22,5 +22,11 @@ namespace Foodie.Controllers
         {
             return _ingriedientsService.AddIngriedient(ingriedient);
         }
+
+        [HttpDelete("{controller}/{action}/{id}")]
+        public void Delete(int id)
+        {
+            _ingriedientsService.DeleteIngriedientById(id);
+        }
     }
 }

@@ -12,3 +12,8 @@
     display: flex;
     justify-content: center;
 }
+
+.mat-panel-description {
+    display: flex;
+    justify-content: center;
+}

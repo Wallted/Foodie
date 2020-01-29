@@ -28,13 +28,15 @@ namespace Foodie.Services
 
             _dbContext.Ingriedients.Add(ingriedientToAdd);
             _dbContext.SaveChanges();
-            return ingriedient.Id;
+            return ingriedientToAdd.Id;
 
         }
 
         public void DeleteIngriedientById(int id)
         {
-            throw new NotImplementedException();
+            var ingriedientToDelete = _dbContext.Ingriedients.FirstOrDefault(x => x.Id == id);
+            _dbContext.Remove(ingriedientToDelete);
+            _dbContext.SaveChanges();
         }
     }
 }
