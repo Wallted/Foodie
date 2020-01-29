@@ -33,26 +33,26 @@
 
                     <!-- Name Column -->
                     <ng-container matColumnDef="quantity">
-                        <mat-header-cell *matHeaderCellDef> Quantity (g)</mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef> Quantity(g)</mat-header-cell>
                         <mat-cell *matCellDef="let element"> {{element.quantity}} </mat-cell>
                     </ng-container>
 
                     <!-- Weight Column -->
                     <ng-container matColumnDef="protein">
-                        <mat-header-cell *matHeaderCellDef> Protein (g)</mat-header-cell>
-                        <mat-cell *matCellDef="let element"> {{element.product.protein}} </mat-cell>
+                        <mat-header-cell *matHeaderCellDef> Protein(g)</mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.product.protein*element.quantity/100}} </mat-cell>
                     </ng-container>
 
                     <!-- Symbol Column -->
                     <ng-container matColumnDef="fat">
-                        <mat-header-cell *matHeaderCellDef> Fat (g)</mat-header-cell>
-                        <mat-cell *matCellDef="let element"> {{element.product.fat}} </mat-cell>
+                        <mat-header-cell *matHeaderCellDef> Fat(g)</mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.product.fat*element.quantity/100}} </mat-cell>
                     </ng-container>
 
                     <!-- Symbol Column -->
                     <ng-container matColumnDef="carb">
-                        <mat-header-cell *matHeaderCellDef> Carb (g)</mat-header-cell>
-                        <mat-cell *matCellDef="let element"> {{element.product.carb}} </mat-cell>
+                        <mat-header-cell *matHeaderCellDef> Carbs(g)</mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.product.carbs*element.quantity/100}} </mat-cell>
                     </ng-container>
 
                     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

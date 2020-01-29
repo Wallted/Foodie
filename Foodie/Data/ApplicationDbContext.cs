@@ -21,5 +21,13 @@ namespace Foodie.Data
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<Meal>()
+                .HasMany(i => i.Ingriedients).
+                WithOne(m => m.Meal).OnDelete(DeleteBehavior.Cascade);
+        }
     }
 }
