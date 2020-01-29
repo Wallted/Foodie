@@ -20,6 +20,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { IngriedientDialogComponent } from './ingriedient-dialog/ingriedient-dialog.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 
@@ -48,7 +49,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatDialogModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
-    MatProgressSpinnerModule 
+    MatProgressSpinnerModule,
+    MatTooltipModule
   ],
   entryComponents:[
     IngriedientDialogComponent

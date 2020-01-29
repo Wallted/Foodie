@@ -8,7 +8,7 @@
     text-align: center;
 }
 
-.spinner {
+.center {
     display: flex;
     justify-content: center;
 }
@@ -16,4 +16,43 @@
 .mat-panel-description {
     display: flex;
     justify-content: center;
+}
+
+.mat-cell {
+    align-items: center;
+    font-size: 12px
+}
+
+.cell {
+    display: flex;
+    justify-content: right;
+}
+
+.mat-column-delete {
+    flex: 0 0 40px !important;
+}
+
+.mat-header-cell,
+.mat-cell {
+    display: flex;
+    justify-content: center;
+}
+
+.mat-header-cell:first-of-type {
+    padding-left: 16px;
+}
+
+.mat-cell:first-of-type {
+    padding-left: 16px;
+}
+
+.floating-button {
+    position: fixed;
+    bottom: 5%;
+    right: 5%;
+    width: 22vw;
+    height: 22vw;
+    max-width: 250px;
+    max-height: 250px;
+    background-color: seagreen !important;
 }

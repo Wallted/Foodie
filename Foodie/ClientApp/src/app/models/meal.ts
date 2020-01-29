@@ -5,5 +5,7 @@ export interface Meal{
     name: string;
     date: Date;
     ingriedients: Ingriedient[];
-    color: string;
+    panelColor: string;
+    tableColor: string;
+    deleteForbid:boolean;
 }
