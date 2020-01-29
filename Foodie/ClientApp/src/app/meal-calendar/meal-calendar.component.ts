@@ -54,7 +54,7 @@ export class MealCalendarComponent implements OnInit {
 
   deleteMeal(mealId: number, exp: MatExpansionPanel) {
     exp.toggle();
-    var mealIndex=this.meals.findIndex(m=>m.id = mealId);
+    var mealIndex=this.meals.findIndex(m=>m.id == mealId);
     this.meals.splice(mealIndex, 1);
     this.mealService.deleteMeal(mealId).subscribe((result) =>{
       //running to slow?
