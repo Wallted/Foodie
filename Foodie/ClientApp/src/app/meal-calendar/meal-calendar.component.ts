@@ -17,7 +17,7 @@ export class MealCalendarComponent implements OnInit {
   public meals: Meal[] = new Array<Meal>();
   public fetchingData: boolean = true;
 
-  displayedColumns: string[] = ['name', 'quantity', 'protein', 'fat', 'carb', 'bin'];
+  displayedColumns: string[] = ['name', 'calories', 'quantity', 'protein', 'fat', 'carb', 'delete'];
 
   constructor(public dialog: MatDialog, public mealService: MealsService) {
     this.getData()
@@ -27,12 +27,15 @@ export class MealCalendarComponent implements OnInit {
   }
 
   getData() {
+    this.actualStep=0;
     this.fetchingData = true;
     this.mealService.getMealsFromDay(this.day).subscribe((result) => {
-      this.meals = result.map(function (meal) {
-        var color = Math.floor(Math.random() * 360) + 1
-        meal.color = 'hsl(' + color + ', 100%, 80%)'
-        return meal;
+      this.meals=result;
+      this.meals.forEach(element => {
+        element.deleteForbid=false;
+        var color = this.getRandomColor();
+        element.panelColor = this.getPanelColor(color);
+        element.tableColor = this.getTableColor(color);
       });
       this.fetchingData = false;
     })
@@ -44,27 +47,39 @@ export class MealCalendarComponent implements OnInit {
   }
 
   addMeal() {
-    var meal: Meal = { id: 0, name: "", date: this.day, ingriedients: new Array<Ingriedient>(), color: this.getRandomColor() };
-    console.log(meal)
+    var color = this.getRandomColor();
+    var meal: Meal = { id: 0, name: "", date: this.day, ingriedients: new Array<Ingriedient>(), panelColor: this.getPanelColor(color), tableColor: this.getTableColor(color), deleteForbid: true};
     this.meals.push(meal)
     this.mealService.addMeal(meal).subscribe((result) => {
+      meal.deleteForbid=false;
       meal.id = result;
     });
   }
 
   deleteMeal(mealId: number, exp: MatExpansionPanel) {
     exp.toggle();
-    var mealIndex=this.meals.findIndex(m=>m.id == mealId);
+    var mealIndex = this.meals.findIndex(m => m.id == mealId);
     this.meals.splice(mealIndex, 1);
-    this.mealService.deleteMeal(mealId).subscribe((result) =>{
-      //running to slow?
+    this.mealService.deleteMeal(mealId).subscribe((result) => {
     });
   }
 
-  getRandomColor() {
-    var color = Math.floor(Math.random() * 360) + 1
+  step: number =36;
+  actualStep: number = 0;
+  getRandomColor(): number {
+    var color = Math.floor(Math.random() * this.step) + this.actualStep;
+    this.actualStep=(this.actualStep+this.step)%360;
+    return color;
+  }
+
+  
+  getPanelColor(color: number) {
     return 'hsl(' + color + ', 100%, 80%)'
   }
+  getTableColor(color: number) {
+    return 'hsl(' + color + ', 100%, 90%)'
+  }
+
 
   addIngriedient(meal: Meal) {
     const dialogRef = this.dialog.open(IngriedientDialogComponent, {
@@ -81,10 +96,10 @@ export class MealCalendarComponent implements OnInit {
     });
   }
 
-  removeIngriedient(meal: Meal, ingriedientId: number){
-    var index = meal.ingriedients.findIndex(x=>x.id == ingriedientId);
+  removeIngriedient(meal: Meal, ingriedientId: number) {
+    var index = meal.ingriedients.findIndex(x => x.id == ingriedientId);
     meal.ingriedients.splice(index, 1);
-    this.mealService.deleteIngriedient(ingriedientId).subscribe((result)=>{
+    this.mealService.deleteIngriedient(ingriedientId).subscribe((result) => {
       // this.getData();
     })
   }
