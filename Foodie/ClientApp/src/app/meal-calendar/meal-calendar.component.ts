@@ -5,6 +5,7 @@ import { Product } from '../models/product';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IngriedientDialogComponent } from '../ingriedient-dialog/ingriedient-dialog.component';
 import { MealsService } from '../services/meals.service';
+import { MatExpansionPanel } from '@angular/material/expansion';
 
 @Component({
   selector: 'app-meal-calendar',
@@ -16,7 +17,7 @@ export class MealCalendarComponent implements OnInit {
   public meals: Meal[] = new Array<Meal>();
   public fetchingData: boolean = true;
 
-  displayedColumns: string[] = ['name', 'quantity', 'protein', 'fat', 'carb'];
+  displayedColumns: string[] = ['name', 'quantity', 'protein', 'fat', 'carb', 'bin'];
 
   constructor(public dialog: MatDialog, public mealService: MealsService) {
     this.getData()
@@ -51,6 +52,14 @@ export class MealCalendarComponent implements OnInit {
     });
   }
 
+  deleteMeal(mealId: number, exp: MatExpansionPanel) {
+    exp.toggle();
+    this.mealService.deleteMeal(mealId).subscribe((result) =>{
+      console.log("angular deleted meal-" + mealId)
+      this.getData();
+    });
+  }
+
   getRandomColor() {
     var color = Math.floor(Math.random() * 360) + 1
     return 'hsl(' + color + ', 100%, 80%)'
@@ -64,10 +73,18 @@ export class MealCalendarComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       meal.ingriedients.push(result);
       meal.ingriedients = [...meal.ingriedients]
-      result.mealId=meal.id;
+      result.mealId = meal.id;
       this.mealService.addIngriedient(result).subscribe((resultID) => {
         result.id = resultID;
       })
     });
+  }
+
+  removeIngriedient(meal: Meal, ingriedientId: number){
+    var index = meal.ingriedients.findIndex(x=>x.id = ingriedientId);
+    meal.ingriedients.splice(index, 1);
+    this.mealService.deleteIngriedient(ingriedientId).subscribe((result)=>{
+      // this.getData();
+    })
   }
 }

@@ -21,11 +21,18 @@ export class MealsService {
   }
 
   addMeal(meal: Meal): Observable<number> {
-    meal.date=new Date(meal.date.toUTCString());
+    meal.date = new Date(meal.date.toUTCString());
     return this._http.post<number>(this._baseUrl + 'meals/add', meal);
+  }
+
+  deleteMeal(mealId: number): Observable<any> {
+    return this._http.delete<any>(this._baseUrl + 'meals/delete/' + mealId);
   }
 
   addIngriedient(ingriedient: Ingriedient): Observable<number> {
     return this._http.post<number>(this._baseUrl + 'ingriedients/add', ingriedient);
+  }
+  deleteIngriedient(ingriedientId: number): Observable<any> {
+    return this._http.delete<any>(this._baseUrl + 'ingriedients/delete/'+ ingriedientId);
   }
 }

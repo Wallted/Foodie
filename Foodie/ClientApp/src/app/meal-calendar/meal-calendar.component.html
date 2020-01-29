@@ -12,19 +12,25 @@
     </div>
     <div *ngIf="!fetchingData">
         <mat-accordion>
-            <mat-expansion-panel *ngFor="let meal of meals; let i = index" [style.background-color]="meal.color">
-                <mat-expansion-panel-header [expandedHeight]="'80px'" [collapsedHeight]="'70px'">
+            <mat-expansion-panel *ngFor="let meal of meals; let i = index" #exp [style.background-color]="meal.color">
+                <mat-expansion-panel-header [expandedHeight]="'80px'" [collapsedHeight]="'70px'" [style.background-color]="meal.color">
                     <mat-panel-title>
-                        <mat-form-field mb-5>
+                        <!-- <mat-form-field mb-5>
                             <input matInput value="{{meal.name}}" autocomplete="off">
-                        </mat-form-field>
+                        </mat-form-field> -->
+                        <button mat-icon-button (click)="deleteMeal(meal.id, exp)" class="spinner">
+                            <i class="material-icons">delete</i>
+                        </button>
                     </mat-panel-title>
-                    <mat-panel-description class="container date">
-                        Meal no. {{i+1}}
+                    <mat-panel-description class="date">
+                        <span></span>
+                        <div class="container">
+                            Meal no. {{i+1}}
+                        </div>
                     </mat-panel-description>
                 </mat-expansion-panel-header>
 
-                <mat-table [dataSource]="meal.ingriedients" class="mat-elevation-z8" *ngIf="meal.ingriedients">
+                <mat-table [dataSource]="meal.ingriedients" class="mat-elevation-z8" *ngIf="meal.ingriedients.length>0">
                     <!-- Position Column -->
                     <ng-container matColumnDef="name">
                         <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
@@ -40,19 +46,28 @@
                     <!-- Weight Column -->
                     <ng-container matColumnDef="protein">
                         <mat-header-cell *matHeaderCellDef> Protein(g)</mat-header-cell>
-                        <mat-cell *matCellDef="let element"> {{element.product.protein*element.quantity/100}} </mat-cell>
+                        <mat-cell *matCellDef="let element"> {{element.product.protein*element.quantity/100 | number: '1.2-2'}} </mat-cell>
                     </ng-container>
 
                     <!-- Symbol Column -->
                     <ng-container matColumnDef="fat">
                         <mat-header-cell *matHeaderCellDef> Fat(g)</mat-header-cell>
-                        <mat-cell *matCellDef="let element"> {{element.product.fat*element.quantity/100}} </mat-cell>
+                        <mat-cell *matCellDef="let element"> {{element.product.fat*element.quantity/100 | number: '1.2-2'}} </mat-cell>
                     </ng-container>
 
                     <!-- Symbol Column -->
                     <ng-container matColumnDef="carb">
                         <mat-header-cell *matHeaderCellDef> Carbs(g)</mat-header-cell>
-                        <mat-cell *matCellDef="let element"> {{element.product.carbs*element.quantity/100}} </mat-cell>
+                        <mat-cell *matCellDef="let element"> {{element.product.carbs*element.quantity/100 | number: '1.2-2'}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="bin">
+                        <mat-header-cell *matHeaderCellDef>
+
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <button mat-icon-button (click)="removeIngriedient(meal, element.id)" class="spinner">
+                            <i class="material-icons">delete</i></button></mat-cell>
                     </ng-container>
 
                     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
