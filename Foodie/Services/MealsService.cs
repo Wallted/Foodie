@@ -30,8 +30,8 @@ namespace Foodie.Services
         public MacroDTO CalculateMacroFromDay(DateTime date, string userId)
         {
             var macro = new MacroDTO();
-            var meals = GetAllMealsFromSpecificDay(date, userId);
-            var data = _dataService.GetDayData(date);
+            var meals = GetAllMealsFromSpecificDay(date.ToUniversalTime(), userId);
+            var data = _dataService.GetDayData(date.ToUniversalTime());
 
             if (data.IsMan)
             {

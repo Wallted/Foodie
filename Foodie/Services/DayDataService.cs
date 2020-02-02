@@ -30,7 +30,7 @@ namespace Foodie.Services
 
         public DayData GetDayData(DateTime day)
         {
-            return _dbContext.DayData.FirstOrDefault(x => x.Date.Day == day.Day);
+            return _dbContext.DayDatas.FirstOrDefault(x => x.Date.Day == day.Day);
         }
     }
 }

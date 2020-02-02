@@ -26,10 +26,10 @@ namespace Foodie.Controllers
             return _dayDataService.AddData(dayData, userId);
         }
 
-        [HttpGet("{controller}/{action}/{date}")]
-        public DayData Get([FromRoute] DateTime date)
+        [HttpGet("{controller}/{action}/{datTime}")]
+        public DayData Get([FromRoute] DateTime dateTime)
         {
-            var d = _dayDataService.GetDayData(date);
+            var d = _dayDataService.GetDayData(dateTime);
             return d;
         }
 

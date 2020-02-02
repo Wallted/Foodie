@@ -24,11 +24,11 @@ namespace Foodie.Controllers
             return _mealsService.AddMeal(meal, userId);
         }
 
-        [HttpGet("{controller}/{action}/{date}")]
-        public IEnumerable<Meal> Get([FromRoute] DateTime date)
+        [HttpGet("{controller}/{action}/{dateTime}")]
+        public IEnumerable<Meal> Get([FromRoute] DateTime dateTime)
         {
             var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.NameIdentifier).FirstOrDefault().Value;
-            return _mealsService.GetAllMealsFromSpecificDay(date, userId);
+            return _mealsService.GetAllMealsFromSpecificDay(dateTime, userId);
         }
 
         [HttpDelete("{controller}/{action}/{id}")]
@@ -37,11 +37,11 @@ namespace Foodie.Controllers
             _mealsService.DeleteMeal(id);
         }
 
-        [HttpGet("{controller}/macro/{date}")]
-        public MacroDTO GetMacroFromDay([FromRoute] DateTime date)
+        [HttpGet("{controller}/macro/{datTimee}")]
+        public MacroDTO GetMacroFromDay([FromRoute] DateTime datTimee)
         {
             var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.NameIdentifier).FirstOrDefault().Value;
-            return _mealsService.CalculateMacroFromDay(date, userId);
+            return _mealsService.CalculateMacroFromDay(datTimee, userId);
         }
 
         [HttpGet]
