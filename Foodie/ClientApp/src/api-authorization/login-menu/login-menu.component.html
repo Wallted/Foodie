@@ -1,19 +1,20 @@
-<ul class="navbar-nav" *ngIf="isAuthenticated | async">
-    <li class="nav-item">
-        <a class="nav-link text-dark" [routerLink]='["/mealcalendar"]' title="Manage">Meal calendar</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" [routerLink]='["/authentication/profile"]' title="Manage">Hello {{ userName | async }}!</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" [routerLink]='["/authentication/logout"]' [state]='{ local: true }' title="Logout">Logout</a>
-    </li>
-</ul>
-<ul class="navbar-nav" *ngIf="!(isAuthenticated | async)">
-    <li class="nav-item">
-        <a class="nav-link text-dark" [routerLink]='["/authentication/register"]'>Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" [routerLink]='["/authentication/login"]'>Login</a>
-    </li>
-</ul>
+<div class="d-flex" *ngIf="isAuthenticated | async">
+    <button mat-button [routerLink]='["/authentication/profile"]' title="Manage">
+        <span class="d-none d-sm-inline">Hello, {{(userName | async) | domainless}}   </span>
+        <mat-icon>account_circle</mat-icon>
+    </button>
+    <a [routerLink]='["/authentication/logout"]' [state]='{ local: true }' title="Logout"><button mat-button>
+            <span class="d-none d-sm-inline">Logout   </span>
+            <mat-icon>exit_to_app</mat-icon>
+        </button></a>
+
+</div>
+<div class="d-flex" *ngIf="!(isAuthenticated | async)">
+    <a [routerLink]='["/authentication/register"]' [state]='{ local: true }' title="Register"><button
+            mat-button>Register
+            <mat-icon>person_add</mat-icon>
+        </button></a>
+    <a [routerLink]='["/authentication/login"]' [state]='{ local: true }' title="Login"><button mat-button>Login
+            <mat-icon>person_outline</mat-icon>
+        </button></a>
+</div>

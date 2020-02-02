@@ -23,7 +23,9 @@ namespace Foodie.Services
 
         public void DeleteProduct(int productId)
         {
-            throw new NotImplementedException();
+            var productToDelete = _dbContext.Products.FirstOrDefault(x => x.Id == productId);
+            _dbContext.Products.Remove(productToDelete);
+            _dbContext.SaveChanges();
         }
 
         public IEnumerable<Product> GetAllProducts()

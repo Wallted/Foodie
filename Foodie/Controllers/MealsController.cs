@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Foodie.DTOs;
 using Foodie.Models;
 using Foodie.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -34,6 +35,13 @@ namespace Foodie.Controllers
         public void Delete([FromRoute] int id)
         {
             _mealsService.DeleteMeal(id);
+        }
+
+        [HttpGet("{controller}/macro/{date}")]
+        public MacroDTO GetMacroFromDay([FromRoute] DateTime date)
+        {
+            var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.NameIdentifier).FirstOrDefault().Value;
+            return _mealsService.CalculateMacroFromDay(date, userId);
         }
 
         [HttpGet]

@@ -30,5 +30,11 @@ namespace Foodie.Controllers
         {
             _productsService.AddProduct(product);
         }
+
+        [HttpDelete("{controller}/{action}/{productId}")]
+        public void Delete([FromRoute] int productId)
+        {
+            _productsService.DeleteProduct(productId);
+        }
     }
 }

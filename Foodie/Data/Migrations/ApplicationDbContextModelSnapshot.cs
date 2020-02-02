@@ -38,9 +38,6 @@ namespace Foodie.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<double>("KcalDemand")
-                        .HasColumnType("float");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -74,9 +71,6 @@ namespace Foodie.Data.Migrations
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
-                    b.Property<double>("Weight")
-                        .HasColumnType("float");
-
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -88,6 +82,44 @@ namespace Foodie.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("Foodie.Models.DayData", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("Height")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("IsMan")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("TrainingDay")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("TrainingFactor")
+                        .HasColumnType("float");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<double>("Weight")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("DayData");
                 });
 
             modelBuilder.Entity("Foodie.Models.Ingriedient", b =>
@@ -383,6 +415,13 @@ namespace Foodie.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Foodie.Models.DayData", b =>
+                {
+                    b.HasOne("Foodie.Models.ApplicationUser", "User")
+                        .WithMany("DayData")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Foodie.Models.Ingriedient", b =>

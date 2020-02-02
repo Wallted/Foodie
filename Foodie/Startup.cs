@@ -34,6 +34,7 @@ namespace Foodie
             services.AddTransient<IProductsService, ProductsService>();
             services.AddTransient<IMealsService, MealsService>();
             services.AddTransient<IIngriedientsService, IngriedientService>();
+            services.AddTransient<IDayDataService, DayDataService>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(

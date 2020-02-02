@@ -1,19 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginMenuComponent } from './login-menu/login-menu.component';
+import { LoginMenuComponent, DomainlessPipe } from './login-menu/login-menu.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { RouterModule } from '@angular/router';
 import { ApplicationPaths } from './api-authorization.constants';
 import { HttpClientModule } from '@angular/common/http';
-import { MealCalendarComponent } from 'src/app/meal-calendar/meal-calendar.component';
-import { ProductsComponent } from 'src/app/products/products.component';
-import { AuthorizeGuard } from './authorize.guard';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
+    MatIconModule,
+    MatButtonModule,
     RouterModule.forChild(
       [
         { path: ApplicationPaths.Register, component: LoginComponent },
@@ -24,14 +25,10 @@ import { AuthorizeGuard } from './authorize.guard';
         { path: ApplicationPaths.LogOut, component: LogoutComponent },
         { path: ApplicationPaths.LoggedOut, component: LogoutComponent },
         { path: ApplicationPaths.LogOutCallback, component: LogoutComponent },
-        { path: "mealcalendar", component: MealCalendarComponent, canActivate: [AuthorizeGuard] },
-        { path: 'products', component: ProductsComponent, canActivate: [AuthorizeGuard] },
-
-        
       ]
     )
   ],
-  declarations: [LoginMenuComponent, LoginComponent, LogoutComponent],
+  declarations: [LoginMenuComponent, LoginComponent, LogoutComponent, DomainlessPipe],
   exports: [LoginMenuComponent, LoginComponent, LogoutComponent]
 })
 export class ApiAuthorizationModule { }

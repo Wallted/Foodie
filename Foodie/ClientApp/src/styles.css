@@ -33,3 +33,8 @@ button.active:focus {
     outline: none !important;
     outline-style: none !important;
 }
+
+.mat-progress-spinner circle,
+.mat-spinner circle {
+    stroke: #20e3b2 !important;
+}

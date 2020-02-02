@@ -1,22 +1,69 @@
-<p>Products</p>
+<div class="container">
+    <h1 class="text-left mb-3">Products</h1>
 
-<p *ngIf="!products"><em>Loading...</em></p>
+    <p *ngIf="!products"><em>Loading...</em></p>
 
-<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="products">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Protein</th>
-            <th>Fat</th>
-            <th>Carbs</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let product of products">
-            <td>{{ product.name }}</td>
-            <td>{{ product.protein }}</td>
-            <td>{{ product.fat }}</td>
-            <td>{{ product.carbs }}</td>
-        </tr>
-    </tbody>
-</table>
+    <form>
+        <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="products">
+            <thead>
+                <tr>
+                    <td>
+                        <mat-form-field>
+                            <input matInput placeholder="Name" [(ngModel)]="formProduct.name" name="name">
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput placeholder="Calories" [(ngModel)]="formProduct.calories" name="calories">
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput placeholder="Protein" [(ngModel)]="formProduct.protein" name="protein">
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput placeholder="Fat" [(ngModel)]="formProduct.fat" name="fat">
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput placeholder="Carbs" [(ngModel)]="formProduct.carbs" name="carbs">
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <button mat-button class="ml-3" (click)="onSubmit()">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <th>Calories</th>
+                    <th>Protein</th>
+                    <th>Fat</th>
+                    <th>Carbs</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr *ngFor="let product of products">
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.calories }}</td>
+                    <td>{{ product.protein }}</td>
+                    <td>{{ product.fat }}</td>
+                    <td>{{ product.carbs }}
+                    </td>
+
+                    <td>
+                        <button mat-button class="ml-3" (click)="onDelete(product.id)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>

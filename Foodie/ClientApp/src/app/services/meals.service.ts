@@ -5,6 +5,7 @@ import { Meal } from '../models/meal';
 import { DatePipe } from '@angular/common';
 import { debug } from 'util';
 import { Ingriedient } from '../models/ingiedient';
+import { Macro } from '../models/Macro';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ import { Ingriedient } from '../models/ingiedient';
 export class MealsService {
   _baseUrl: string;
 
-  constructor(private _http: HttpClient, @Inject('BASE_URL') baseUrl: string, @Inject('LOCALE_ID') private localeId: string) {
+  constructor(private _http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     this._baseUrl = baseUrl;
   }
 
@@ -33,6 +34,10 @@ export class MealsService {
     return this._http.post<number>(this._baseUrl + 'ingriedients/add', ingriedient);
   }
   deleteIngriedient(ingriedientId: number): Observable<any> {
-    return this._http.delete<any>(this._baseUrl + 'ingriedients/delete/'+ ingriedientId);
+    return this._http.delete<any>(this._baseUrl + 'ingriedients/delete/' + ingriedientId);
+  }
+
+  getMacro(day: Date): Observable<Macro> {
+    return this._http.get<Macro>(this._baseUrl + 'meals/macro/' + day.toUTCString());
   }
 }
