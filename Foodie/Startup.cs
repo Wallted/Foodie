@@ -36,6 +36,8 @@ namespace Foodie
             services.AddTransient<IIngriedientsService, IngriedientService>();
             services.AddTransient<IDayDataService, DayDataService>();
 
+
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));

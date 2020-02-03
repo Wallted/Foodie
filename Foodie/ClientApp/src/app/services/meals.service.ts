@@ -5,7 +5,7 @@ import { Meal } from '../models/meal';
 import { DatePipe } from '@angular/common';
 import { debug } from 'util';
 import { Ingriedient } from '../models/ingiedient';
-import { Macro } from '../models/Macro';
+import { Macro } from '../models/macro';
 
 @Injectable({
   providedIn: 'root'
