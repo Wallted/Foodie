@@ -1,8 +1,4 @@
-<body>
+<body (swipeLeft)="onSwipeLeft($event)" (swipeRight)="onSwipeRight($event)">
     <app-nav-menu></app-nav-menu>
-    <div style="height: 100%;" (swipeLeft)="onSwipeLeft($event)" (swipeRight)="onSwipeRight($event)">
-        <router-outlet></router-outlet>
-        <div class="container">
-        </div>
-    </div>
+    <router-outlet></router-outlet>
 </body>
