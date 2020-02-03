@@ -3,7 +3,7 @@
 
     <p *ngIf="!products"><em>Loading...</em></p>
 
-    <form>
+    <!-- <form>
         <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="products">
             <thead>
                 <tr>
@@ -65,5 +65,18 @@
                 </tr>
             </tbody>
         </table>
-    </form>
+    </form> -->
+
+</div>
+<mat-chip-list class="d-none d-lg-inline">
+    <div class="floating-buttons">
+        <mat-chip class="floating-button-large" [routerLink]='["/mealcalendar"]'><i class=" material-icons ">calendar_today</i>Manage meals</mat-chip>
+        <mat-chip class="floating-button-large"><i class=" material-icons ">add</i> Add new product </mat-chip>
+    </div>
+</mat-chip-list>
+
+<div class="floating-buttons">
+    <button mat-fab class=" floating-button d-inline d-lg-none " [routerLink]='["/mealcalendar"]'><i
+            class="material-icons ">calendar_today</i></button>
+    <button mat-fab class=" floating-button d-inline d-lg-none "><i class="material-icons ">add</i></button>
 </div>

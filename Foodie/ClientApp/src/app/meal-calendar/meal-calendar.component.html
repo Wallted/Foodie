@@ -10,7 +10,7 @@
     <div *ngIf="fetchingData" class="center mt-5">
         <mat-spinner [diameter]="180"></mat-spinner>
     </div>
-    <div *ngIf="!fetchingData">
+    <div class="mb-5" *ngIf="!fetchingData">
         <mat-accordion>
             <mat-expansion-panel *ngFor="let meal of meals; let i = index" #exp [style.background-color]="meal.panelColor">
                 <mat-expansion-panel-header [expandedHeight]="'80px'" [collapsedHeight]="'70px'" [style.background-color]="meal.panelColor">
@@ -112,4 +112,14 @@
         </mat-accordion>
     </div>
 </div>
-<button mat-fab class="floating-button" (click)="addMeal()"><i class="material-icons">add</i></button>
+<mat-chip-list class="d-none d-lg-inline">
+    <div class="floating-buttons">
+        <mat-chip class="floating-button-large" [routerLink]='["/products"]' disableRipple><i class=" material-icons ">list</i>Manage products</mat-chip>
+        <mat-chip class="floating-button-large" (click)="addMeal()" disableRipple><i class=" material-icons ">add</i> Add new meal </mat-chip>
+    </div>
+</mat-chip-list>
+
+<div class="floating-buttons">
+    <button mat-fab class=" floating-button d-inline d-lg-none " [routerLink]='["/products"]'><i class="material-icons ">list</i></button>
+    <button mat-fab class=" floating-button d-inline d-lg-none " (click)="addMeal() "><i class="material-icons ">add</i></button>
+</div>

@@ -28,6 +28,8 @@ import * as Hammer from 'hammerjs';
 import { StartingComponent } from './starting/starting.component';
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { MatIconModule } from '@angular/material/icon';
+import {MatChipsModule} from '@angular/material/chips';
+
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -74,7 +76,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     MatTooltipModule,
     MatProgressBarModule,
     CountoModule,
-    MatIconModule
+    MatIconModule,
+    MatChipsModule,
   ],
   entryComponents: [
     IngriedientDialogComponent

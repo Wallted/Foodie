@@ -1,3 +1,9 @@
+@media screen and (min-width: 992px) {
+    .container {
+        width: 720px;
+    }
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -47,12 +53,19 @@
 }
 
 .floating-button {
-    position: fixed;
-    bottom: 5%;
-    right: 5%;
-    width: 4.5em;
-    height: 4.5em;
-    max-width: 250px;
-    max-height: 250px;
+    /* position: fixed;
+    bottom: 5vw;
+    right: 5%; */
+    transform: scale(1.02);
     background: linear-gradient(to right, #0cebeb, #20e3b2, #29ffc6);
+    margin-top: 20px;
+}
+
+.floating-button-large {
+    transform: scale(1.5);
+    background: linear-gradient(to right, #0cebeb, #20e3b2, #29ffc6);
+    color: white;
+    justify-content: space-evenly;
+    font-weight: 400;
+    margin-top: 27px !important;
 }
