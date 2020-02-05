@@ -62,3 +62,18 @@ export const slideInAnimation =
     transition('HomePage => DataPage' ,  slideRight),
     transition('MealsPage => DataPage' ,  slideRight)
   ]);
+
+/*          FLOATING BUTTON ANIMATIONS         */
+const fadeOut = [
+  query(':enter', [
+    style({ opacity: 0})
+  ]),
+  query('in', [
+    style({ opacity: 1})
+  ]),
+]
+
+export const fadeAnimation =
+  trigger('buttonAnimations', [
+    transition('void => *', fadeOut),
+  ]);

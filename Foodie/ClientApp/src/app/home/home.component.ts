@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { MealsService } from '../services/meals.service';
-import { DayDataService } from '../services/day-data.service';
-import { Ingriedient } from '../models/ingiedient';
 import { Macro } from '../models/macro';
 
 @Component({

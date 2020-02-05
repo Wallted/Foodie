@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DayDataService } from '../services/day-data.service';
-import { DayData } from '../models/daydata';
+import { UserInfoService } from '../services/user-info.service';
+import { UserInfo } from '../models/userinfo';
 
 @Component({
   selector: 'app-data',
@@ -9,18 +9,31 @@ import { DayData } from '../models/daydata';
 })
 export class DataComponent implements OnInit {
 
-  constructor(private _dayDataService: DayDataService) { }
+  constructor(private _userInfoService: UserInfoService) { }
 
-  dayData: DayData ={id: 0, date: new Date, age: 23, weight: 85, height:182, trainingFactor: 1.5, isMan: true }
+  trainingFactors = [
+    { value: 1.2, description: 'sedentary (little or no exercise)' },
+    { value: 1.375, description: 'lightly active (light exercise/sports 1-3 days/week)' },
+    { value: 1.55, description: 'moderately active (moderate exercise/sports 3-5 days/week)' },
+    { value: 1.725, description: 'very active (hard exercise/sports 6-7 days a week)' },
+    { value: 1.9, description: 'extra active (very hard exercise/sports & physical job or 2x training)' },
+  ]
+  userInfo: UserInfo;
+
   ngOnInit() {
-    // this._dayDataService.getDayData(new Date()).subscribe(result=>{
-    //   this.dayData=result;
-    // })
+    this._userInfoService.getUserInfo().subscribe(result=>this.userInfo=result)
   }
 
-  addDayData(){
-    this._dayDataService.addDayData(this.dayData).subscribe(result=>{
-      this.dayData.id=result;
-    })
+  updateUserInfo() {
+    // console.log(this.userInfo.trainingFactor);
+    this._userInfoService.updateUserInfo(this.userInfo).subscribe();
+  }
+
+  ngOnDestroy() {
+    this._userInfoService.updateUserInfo(this.userInfo).subscribe();
+  }
+
+  isSelected(value: number){
+
   }
 }

@@ -36,14 +36,13 @@ export class AppComponent {
   }
 
   onSwipeDown(evt){
-    console.log("XD")
     evt.srcEvent.stopPropagation();
     evt.preventDefault();
 
   }
 
   prepareRoute(outlet: RouterOutlet) {
-    console.log(outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'])
+    // console.log(outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'])
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }
 }

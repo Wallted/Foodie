@@ -15,7 +15,7 @@ namespace Foodie.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Ingriedient> Ingriedients { get; set; }
         public DbSet<Meal> Meals { get; set; }
-        public DbSet<DayData> DayDatas { get; set; }
+        public DbSet<UserInfo> UserInfos { get; set; }
 
         public ApplicationDbContext(
             DbContextOptions options,
@@ -29,6 +29,11 @@ namespace Foodie.Data
             builder.Entity<Meal>()
                 .HasMany(i => i.Ingriedients).
                 WithOne(m => m.Meal).OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<ApplicationUser>()
+                .HasOne(u => u.UserInfo)
+                .WithOne(uf => uf.User).
+                HasForeignKey<UserInfo>(uf => uf.UserRef);
         }
     }
 }

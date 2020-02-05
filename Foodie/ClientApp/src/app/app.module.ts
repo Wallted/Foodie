@@ -30,6 +30,9 @@ import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { MatIconModule } from '@angular/material/icon';
 import {MatChipsModule} from '@angular/material/chips';
 import { ProductDialogComponent } from './product-dialog/product-dialog.component';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatSelectModule} from '@angular/material/select';
+
 
 
 export class MyHammerConfig extends HammerGestureConfig {
@@ -80,6 +83,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     CountoModule,
     MatIconModule,
     MatChipsModule,
+    MatRadioModule,
+    MatSelectModule
   ],
   entryComponents: [
     IngriedientDialogComponent,

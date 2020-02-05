@@ -5,38 +5,33 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Foodie.Models;
 using Foodie.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Foodie.Controllers
 {
-    public class DayDataController : Controller
+    [Authorize]
+    public class UserInfoController : Controller
     {
         private readonly IDayDataService _dayDataService;
-        public DayDataController(IDayDataService dayDataService)
+        public UserInfoController(IDayDataService dayDataService)
         {
             _dayDataService = dayDataService;
         }
 
-        [HttpPost]
-        public int Add([FromBody] DayData dayData)
+        [HttpGet]
+        public UserInfo Get()
         {
             var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.NameIdentifier).FirstOrDefault().Value;
-            return _dayDataService.AddData(dayData, userId);
+            return _dayDataService.GetUserInfo(userId);
         }
 
-        [HttpGet("{controller}/{action}/{datTime}")]
-        public DayData Get([FromRoute] DateTime dateTime)
+        [HttpPut]
+        public void Put([FromBody] UserInfo userInfo)
         {
-            var d = _dayDataService.GetDayData(dateTime);
-            return d;
-        }
-
-        [HttpDelete("{controller}/{action}/{id}")]
-        public void Delete(int id)
-        {
-            //_ingriedientsService.DeleteIngriedientById(id);
+            _dayDataService.UpdateUserInfo(userInfo);
         }
     }
 }

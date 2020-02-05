@@ -5,6 +5,6 @@ namespace Foodie.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public List<DayData> DayData { get; set; }
+        public UserInfo UserInfo { get; set; }
     }
 }

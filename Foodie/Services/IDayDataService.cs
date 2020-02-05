@@ -8,8 +8,7 @@ namespace Foodie.Services
 {
     public interface IDayDataService
     {
-        public int AddData(DayData dayData, string userId);
-        public void DeleteData(DayData dayData);
-        public DayData GetDayData(DateTime day);
+        public UserInfo GetUserInfo(string userId);
+        public void UpdateUserInfo(UserInfo userInfo);
     }
 }

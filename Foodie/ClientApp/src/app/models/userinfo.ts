@@ -1,9 +1,9 @@
-export interface DayData{
+export interface UserInfo{
     id: number;
-    date: Date;
     weight: number;
     height: number;
-    age: number;
+    age: number
     isMan: boolean;
+    calorieIntake: number;
     trainingFactor: number;
 }
