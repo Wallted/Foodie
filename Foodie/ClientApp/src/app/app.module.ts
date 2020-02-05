@@ -61,9 +61,9 @@ export class MyHammerConfig extends HammerGestureConfig {
     ApiAuthorizationModule,
     RouterModule.forRoot([
       { path: 'products', component: ProductsComponent, canActivate: [AuthorizeGuard] },
-      { path: 'home', component: HomeComponent, canActivate: [AuthorizeGuard] },
-      { path: "mealcalendar", component: MealCalendarComponent, canActivate: [AuthorizeGuard] },
-      { path: 'data', component: DataComponent, canActivate: [AuthorizeGuard] },
+      { path: 'home', component: HomeComponent, canActivate: [AuthorizeGuard] , data: {animation: 'HomePage'}},
+      { path: "mealcalendar", component: MealCalendarComponent, canActivate: [AuthorizeGuard], data: {animation: 'MealsPage'} },
+      { path: 'data', component: DataComponent, canActivate: [AuthorizeGuard],  data: {animation: 'DataPage'}},
       { path: '', component: StartingComponent},
     ]),
     BrowserAnimationsModule,

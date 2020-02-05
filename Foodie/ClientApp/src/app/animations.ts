@@ -1,0 +1,64 @@
+import { trigger, transition, style, query, animateChild, group, animate } from "@angular/animations";
+
+/*          SCREEN SLIDE ANIMATIONS         */
+
+const slideLeft = [
+    style({ position: 'relative' }),
+    query(':enter, :leave', [
+      style({
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%'
+      })
+    ]),
+    query(':enter', [
+      style({left: '100%'})
+    ]),
+    query(':leave', animateChild()),
+    group([
+      query(':leave', [
+        animate('200ms ease-out', style({ left: '-100%'}))
+      ]),
+      query(':enter', [
+        animate('200ms ease-out', style({ left: '0%'}))
+      ])
+    ]),
+    // query(':enter', animateChild()),
+  ];
+
+  const slideRight = [
+    style({ position: 'relative' }),
+    query(':enter, :leave', [
+      style({
+        position: 'absolute',
+        left: 0,
+        width: '100%',
+        height: 'auto'
+      })
+    ]),
+    query(':enter', [
+      style({ left: '-100%'})
+    ]),
+    query(':leave', animateChild()),
+    group([
+      query(':leave', [
+        animate('200ms ease-out', style({ 
+            left: '100%'
+          }))
+      ]),
+      query(':enter', [
+        animate('200ms ease-out', style({ left: '0%'}))
+      ])
+    ]),
+    query(':enter', animateChild()),
+  ]
+
+export const slideInAnimation =
+  trigger('routeAnimations', [
+    transition('HomePage => MealsPage', slideLeft),
+    transition('DataPage => HomePage', slideLeft),
+    transition('MealsPage => HomePage', slideRight),
+    transition('HomePage => DataPage' ,  slideRight),
+    transition('MealsPage => DataPage' ,  slideRight)
+  ]);

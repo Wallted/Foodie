@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
+import { slideInAnimation } from './animations';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
+  animations: [
+    slideInAnimation
+    // animation triggers go here
+  ]
 })
 export class AppComponent {
   title = 'app';
@@ -35,5 +40,10 @@ export class AppComponent {
     evt.srcEvent.stopPropagation();
     evt.preventDefault();
 
+  }
+
+  prepareRoute(outlet: RouterOutlet) {
+    console.log(outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'])
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }
 }
