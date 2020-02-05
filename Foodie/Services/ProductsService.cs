@@ -15,10 +15,12 @@ namespace Foodie.Services
             _dbContext = applicationDbContext;
         }
 
-        public void AddProduct(Product product)
+        public int AddProduct(Product product)
         {
             _dbContext.Products.Add(product);
             _dbContext.SaveChanges();
+
+            return product.Id;
         }
 
         public void DeleteProduct(int productId)

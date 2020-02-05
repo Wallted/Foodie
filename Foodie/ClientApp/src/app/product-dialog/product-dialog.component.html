@@ -1,0 +1,21 @@
+<div mat-dialog-content>
+    <mat-form-field>
+        <input matInput [(ngModel)]="product.name" placeholder="Name" autocomplete="off">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput [(ngModel)]="product.calories" placeholder="Calories" autocomplete="off">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput [(ngModel)]="product.carbs" placeholder="Carbohydrates" autocomplete="off">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput [(ngModel)]="product.fat" placeholder="Fat" autocomplete="off">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput [(ngModel)]="product.protein" placeholder="Protein" autocomplete="off">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button [mat-dialog-close]="product" cdkFocusInitial>Ok</button>
+</div>

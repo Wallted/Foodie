@@ -29,6 +29,7 @@ import { StartingComponent } from './starting/starting.component';
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { MatIconModule } from '@angular/material/icon';
 import {MatChipsModule} from '@angular/material/chips';
+import { ProductDialogComponent } from './product-dialog/product-dialog.component';
 
 
 export class MyHammerConfig extends HammerGestureConfig {
@@ -50,7 +51,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     MealCalendarComponent,
     IngriedientDialogComponent,
     DataComponent,
-    StartingComponent
+    StartingComponent,
+    ProductDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -80,7 +82,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     MatChipsModule,
   ],
   entryComponents: [
-    IngriedientDialogComponent
+    IngriedientDialogComponent,
+    ProductDialogComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },

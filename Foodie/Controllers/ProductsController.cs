@@ -26,9 +26,9 @@ namespace Foodie.Controllers
         }
 
         [HttpPost]
-        public void Add([FromBody] Product product)
+        public int Add([FromBody] Product product)
         {
-            _productsService.AddProduct(product);
+            return _productsService.AddProduct(product);
         }
 
         [HttpDelete("{controller}/{action}/{productId}")]

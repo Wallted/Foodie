@@ -1,9 +1,14 @@
+@media screen and (min-width: 992px) {
+    .container {
+        width: 720px;
+    }
+}
+
 .container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    width: 90%;
 }
 
 .floating-button {
@@ -22,4 +27,20 @@
     justify-content: space-evenly;
     font-weight: 400;
     margin-top: 27px !important;
+}
+
+.mat-cell,
+.mat-header-cell {
+    justify-content: center;
+    padding-right: 0;
+}
+
+.mat-cell:last-of-type() {
+    justify-content: end;
+}
+
+@media screen and (max-width:450px) {
+    .mat-cell {
+        font-size: 11px;
+    }
 }
