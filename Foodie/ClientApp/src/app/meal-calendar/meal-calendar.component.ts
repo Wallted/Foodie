@@ -50,7 +50,7 @@ export class MealCalendarComponent implements OnInit {
 
   addMeal() {
     var color = this.getRandomColor();
-    var meal: Meal = { id: 0, name: "", date: this.day, ingriedients: new Array<Ingriedient>(), panelColor: this.getPanelColor(color), tableColor: this.getTableColor(color), deleteForbid: true };
+    var meal: Meal = { id: 0, name: "", date: this.day, ingriedients: new Array<Ingriedient>(), panelColor: this.getPanelColor(color), tableColor: this.getTableColor(color), deleteForbid: true, portions: 1 };
     this.meals.push(meal)
     this.mealService.addMeal(meal).subscribe((result) => {
       meal.deleteForbid = false;

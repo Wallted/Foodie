@@ -1,5 +1,5 @@
 <div class="container" *ngIf="computed; else computing">
-    <div class="mt-5">
+    <div class="mt-2">
 
         <h1 class="text-center header">Today's calories left:</h1>
         <h2 class="text-center" counto [step]="1" [countTo]="-macro.caloriesAte+macro.caloriesDemand" [countFrom]="(-macro.caloriesAte+macro.caloriesDemand)/2" [duration]="0.1" (countoChange)="counto = $event">

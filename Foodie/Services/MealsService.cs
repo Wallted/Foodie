@@ -33,24 +33,22 @@ namespace Foodie.Services
             var meals = GetAllMealsFromSpecificDay(date.ToUniversalTime(), userId);
             var data = _dataService.GetUserInfo(userId);
 
-            if (data.IsMan)
-            {
-                macro.CaloriesDemand = Math.Round((10 * data.Weight + 6.25 * data.Height - 5 * data.Age + 5) * data.TrainingFactor + data.CalorieIntake);
-                macro.ProteinDemand = Math.Round(2 * data.Weight);
-                macro.FatDemand = Math.Round(macro.CaloriesDemand * 0.2 / 9);
-                macro.CarbohydratesDemand = Math.Round((macro.CaloriesDemand - macro.ProteinDemand * 4 - macro.FatDemand * 9) / 4);
+            macro.CaloriesDemand = Math.Round((10 * data.Weight + 6.25 * data.Height - 5 * data.Age + (data.IsMan ? 5 : -161)) * data.TrainingFactor + data.CalorieIntake);
+            macro.ProteinDemand = Math.Round(2 * data.Weight);
+            macro.FatDemand = Math.Round(macro.CaloriesDemand * 0.2 / 9);
+            macro.CarbohydratesDemand = Math.Round((macro.CaloriesDemand - macro.ProteinDemand * 4 - macro.FatDemand * 9) / 4);
 
-                foreach (var meal in meals)
+            foreach (var meal in meals)
+            {
+                foreach (Ingriedient ingriedient in meal.Ingriedients)
                 {
-                    foreach (Ingriedient ingriedient in meal.Ingriedients)
-                    {
-                        macro.CarbohydratesAte += (ingriedient.Quantity / 100.0 * ingriedient.Product.Carbs);
-                        macro.FatAte += (ingriedient.Quantity / 100.0 * ingriedient.Product.Fat);
-                        macro.ProteinAte += (ingriedient.Quantity / 100.0 * ingriedient.Product.Protein);
-                        macro.CaloriesAte += (ingriedient.Quantity / 100.0 * ingriedient.Product.Calories);
-                    }
+                    macro.CarbohydratesAte += (ingriedient.Quantity / 100.0 * ingriedient.Product.Carbs);
+                    macro.FatAte += (ingriedient.Quantity / 100.0 * ingriedient.Product.Fat);
+                    macro.ProteinAte += (ingriedient.Quantity / 100.0 * ingriedient.Product.Protein);
+                    macro.CaloriesAte += (ingriedient.Quantity / 100.0 * ingriedient.Product.Calories);
                 }
             }
+
             macro.CarbohydratesAte = Math.Round(macro.CarbohydratesAte);
             macro.FatAte = Math.Round(macro.FatAte);
             macro.ProteinAte = Math.Round(macro.ProteinAte);
