@@ -10,6 +10,7 @@
             Carbohydrates:<br>
             <div class="d-flex justify-content-between">
                 <p class="mb-0">{{macro.carbohydratesAte}} g</p>
+                <p class="mb-0 warn-comment">{{warnComment(macro.carbohydratesAte-macro.carbohydratesDemand, " g")}}</p>
                 <p class="mb-0">{{macro.carbohydratesDemand}} g</p>
             </div>
             <mat-progress-bar class="mb-3" mode="determinate " [value]="macro.carbohydratesRatio" [color]="updateColor(macro.carbohydratesRatio)">
@@ -17,6 +18,7 @@
             Fat:<br>
             <div class="d-flex justify-content-between">
                 <p class="mb-0">{{macro.fatAte}} g</p>
+                <p class="mb-0 warn-comment">{{warnComment(macro.fatAte-macro.fatDemand, " g")}}</p>
                 <p class="mb-0">{{macro.fatDemand}} g</p>
             </div>
             <mat-progress-bar class="mb-3" mode="determinate " [value]="macro.fatRatio" [color]="updateColor(macro.fatRatio)">
@@ -24,6 +26,7 @@
             Protein:<br>
             <div class="d-flex justify-content-between">
                 <p class="mb-0">{{macro.proteinAte}} g</p>
+                <p class="mb-0 warn-comment">{{warnComment(macro.proteinAte-macro.proteinDemand, " g")}}</p>
                 <p class="mb-0">{{macro.proteinDemand}} g</p>
             </div>
             <mat-progress-bar class="mb-3" mode="determinate " [value]="macro.proteinRatio" [color]="updateColor(macro.proteinRatio)">
@@ -31,6 +34,7 @@
             Kcal:<br>
             <div class="d-flex justify-content-between">
                 <p class="mb-0">{{macro.caloriesAte}} kcal</p>
+                <p class="mb-0 warn-comment">{{warnComment(macro.caloriesAte-macro.caloriesDemand, " kcal")}}</p>
                 <p class="mb-0">{{macro.caloriesDemand}} kcal</p>
             </div>
 

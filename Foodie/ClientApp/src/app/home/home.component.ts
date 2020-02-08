@@ -21,7 +21,17 @@ export class HomeComponent {
   }
 
   updateColor(progress) {
+    if (progress > 100)
+      return 'warn';
+    else
       return 'primary';
+  }
+
+  warnComment(exceeding, unit) {
+    if (exceeding > 0)
+      return "Exceeded by " + exceeding + unit;
+    else
+      return "";
   }
 
   ngOnInit() {

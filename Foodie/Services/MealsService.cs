@@ -33,9 +33,11 @@ namespace Foodie.Services
             var meals = GetAllMealsFromSpecificDay(date.ToUniversalTime(), userId);
             var data = _dataService.GetUserInfo(userId);
 
+
+            var fatFactor = 0.25;
             macro.CaloriesDemand = Math.Round((10 * data.Weight + 6.25 * data.Height - 5 * data.Age + (data.IsMan ? 5 : -161)) * data.TrainingFactor + data.CalorieIntake);
             macro.ProteinDemand = Math.Round(2 * data.Weight);
-            macro.FatDemand = Math.Round(macro.CaloriesDemand * 0.2 / 9);
+            macro.FatDemand = Math.Round(macro.CaloriesDemand * fatFactor / 9);
             macro.CarbohydratesDemand = Math.Round((macro.CaloriesDemand - macro.ProteinDemand * 4 - macro.FatDemand * 9) / 4);
 
             foreach (var meal in meals)
