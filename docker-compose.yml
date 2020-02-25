@@ -1,22 +1,30 @@
-version: '3.7'
+version: "3.7"
 
 services:
   kestrel:
+    container_name: foodie
     build:
-       context: ./Foodie
-    ports:
-       - "80:80" 
+      context: ./Foodie
     depends_on:
-             - db
+      - db
 
   db:
     container_name: mssql_db
     image: "mcr.microsoft.com/mssql/server"
-    ports: 
+    ports:
       - "1433:1433"
     environment:
-        SA_PASSWORD: "Your_password123"
-        ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Your_password123"
+      ACCEPT_EULA: "Y"
     volumes:
       - D:\Projects\AspNetProjects\Foodie\mysqldata:/var/opt/mssql/data
-    
+
+  reverseproxy:
+    build:
+      context: ./nginx
+      dockerfile: Nginx.Dockerfile
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - kestrel
