@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace Foodie.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public double Weight { get; set; }
-        public double KcalDemand { get; set; }
+        public UserInfo UserInfo { get; set; }
     }
 }

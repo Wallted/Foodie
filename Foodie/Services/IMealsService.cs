@@ -1,4 +1,5 @@
-﻿using Foodie.Models;
+﻿using Foodie.DTOs;
+using Foodie.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace Foodie.Services
         public IEnumerable<Meal> GetAllMealsFromSpecificDay(DateTime date, string userId);
         public void UpdateMeal(Meal meal);
         public void DeleteMeal(int mealId);
+        public MacroDTO CalculateMacroFromDay(DateTime date, string userId);
     }
 }

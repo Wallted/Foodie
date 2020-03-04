@@ -43,7 +43,7 @@ export class LogoutComponent implements OnInit {
         throw new Error(`Invalid action '${action}'`);
     }
   }
-
+  
   private async logout(returnUrl: string): Promise<void> {
     const state: INavigationState = { returnUrl };
     const isauthenticated = await this.authorizeService.isAuthenticated().pipe(

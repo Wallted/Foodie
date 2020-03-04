@@ -1,58 +1,76 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.date {
-    text-align: center;
-}
-
-.center {
-    display: flex;
-    justify-content: center;
-}
-
-.mat-panel-description {
-    display: flex;
-    justify-content: center;
-}
-
-.mat-cell {
-    align-items: center;
-    font-size: 12px
-}
-
-.cell {
-    display: flex;
-    justify-content: right;
-}
-
-.mat-column-delete {
-    flex: 0 0 40px !important;
-}
-
-.mat-header-cell,
-.mat-cell {
-    display: flex;
-    justify-content: center;
-}
-
-.mat-header-cell:first-of-type {
-    padding-left: 16px;
-}
-
-.mat-cell:first-of-type {
-    padding-left: 16px;
-}
-
-.floating-button {
-    position: fixed;
-    bottom: 5%;
-    right: 5%;
-    width: 22vw;
-    height: 22vw;
-    max-width: 250px;
-    max-height: 250px;
-    background-color: seagreen !important;
-}
+    @media screen and (min-width: 992px) {
+        .container {
+            width: 720px;
+        }
+    }
+    
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    .date {
+        text-align: center;
+    }
+    
+    .center {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .mat-panel-description {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .mat-cell {
+        align-items: center;
+        font-size: 12px
+    }
+    
+    .cell {
+        display: flex;
+        justify-content: right;
+    }
+    
+    .mat-column-delete {
+        flex: 0 0 40px !important;
+    }
+    
+    .mat-header-cell,
+    .mat-cell {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .mat-header-cell:first-of-type {
+        padding-left: 16px;
+    }
+    
+    .mat-cell:first-of-type {
+        padding-left: 16px;
+    }
+    
+    .floating-button {
+        /* position: fixed;
+    bottom: 5vw;
+    right: 5%; */
+        transform: scale(1.02);
+        background: linear-gradient(to right, #0cebeb, #20e3b2, #29ffc6);
+        margin-top: 20px;
+    }
+    
+    .floating-button-large {
+        transform: scale(1.5);
+        background: linear-gradient(to right, #0cebeb, #20e3b2, #29ffc6);
+        color: white;
+        justify-content: space-evenly;
+        font-weight: 400;
+        margin-top: 27px !important;
+    }
+    
+    .snackbar {
+        margin-bottom: 4rem !important;
+        width: 10% !important;
+    }

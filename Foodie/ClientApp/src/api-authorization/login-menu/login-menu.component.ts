@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { AuthorizeService } from '../authorize.service';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
@@ -17,5 +17,14 @@ export class LoginMenuComponent implements OnInit {
   ngOnInit() {
     this.isAuthenticated = this.authorizeService.isAuthenticated();
     this.userName = this.authorizeService.getUser().pipe(map(u => u && u.name));
+  }
+}
+
+@Pipe({
+  name: 'domainless'
+})
+export class DomainlessPipe implements PipeTransform {
+  transform(email: string): string {
+    return email.split('@')[0];
   }
 }

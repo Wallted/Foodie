@@ -38,9 +38,6 @@ namespace Foodie.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<double>("KcalDemand")
-                        .HasColumnType("float");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -73,9 +70,6 @@ namespace Foodie.Data.Migrations
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
-
-                    b.Property<double>("Weight")
-                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -163,9 +157,51 @@ namespace Foodie.Data.Migrations
                     b.Property<double>("Protein")
                         .HasColumnType("float");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Foodie.Models.UserInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<double>("CalorieIntake")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Height")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("IsMan")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("TrainingFactor")
+                        .HasColumnType("float");
+
+                    b.Property<string>("UserRef")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<double>("Weight")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserRef")
+                        .IsUnique()
+                        .HasFilter("[UserRef] IS NOT NULL");
+
+                    b.ToTable("UserInfos");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.DeviceFlowCodes", b =>
@@ -402,6 +438,20 @@ namespace Foodie.Data.Migrations
                     b.HasOne("Foodie.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Foodie.Models.Product", b =>
+                {
+                    b.HasOne("Foodie.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("Foodie.Models.UserInfo", b =>
+                {
+                    b.HasOne("Foodie.Models.ApplicationUser", "User")
+                        .WithOne("UserInfo")
+                        .HasForeignKey("Foodie.Models.UserInfo", "UserRef");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

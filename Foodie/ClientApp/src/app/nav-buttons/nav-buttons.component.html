@@ -1,0 +1,13 @@
+<div *ngIf="isAuthorized" class="container mb-4">
+    <mat-button-toggle-group [appearance]="legacy">
+        <mat-button-toggle [routerLink]='["/data"]' [checked]="dataButtonChecked">
+            <div class="button">Data</div>
+        </mat-button-toggle>
+        <mat-button-toggle [routerLink]='["/home"]' [checked]="homeButtonChecked">
+            <div class="button ">Home</div>
+        </mat-button-toggle>
+        <mat-button-toggle [routerLink]='["/mealcalendar"]' [checked]="mealsButtonChecked">
+            <div class="button ">Meals</div>
+        </mat-button-toggle>
+    </mat-button-toggle-group>
+</div>

@@ -1,6 +1,7 @@
-<body>
-  <app-nav-menu></app-nav-menu>
-  <div class="container">
-    <router-outlet></router-outlet>
-  </div>
+<body (swipeLeft)="onSwipeLeft($event)" (swipeRight)="onSwipeRight($event)">
+    <app-nav-menu></app-nav-menu>
+    <app-nav-buttons></app-nav-buttons>
+    <div [@routeAnimations]="prepareRoute(outlet)">
+        <router-outlet #outlet="outlet"></router-outlet>
+    </div>
 </body>

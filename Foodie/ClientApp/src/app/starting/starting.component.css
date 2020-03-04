@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 90%;
+}
+
+h1 {
+    font-weight: 100;
+    font-size: 27px;
+}
+
+button {
+    background: -webkit-linear-gradient(#0cebeb, #20e3b2, #29ffc6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 27px;
+}
+
+b {
+    font-size: 3rem !important;
+}

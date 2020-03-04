@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="form mt-4" (change)="updateUserInfo()" *ngIf="userInfo">
+        <mat-radio-group class="mb-3" [(ngModel)]="userInfo.isMan" (click)="updateUserInfo()">
+            <mat-radio-button class="float-left" [value]="true">Man</mat-radio-button>
+            <mat-radio-button value="false" [value]="false">Woman</mat-radio-button>
+        </mat-radio-group>
+        <mat-form-field>
+            <input matInput placeholder="Weight" [(ngModel)]="userInfo.weight" autocomplete="off">
+            <span matSuffix>kg</span>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Height" [(ngModel)]="userInfo.height" autocomplete="off">
+            <span matSuffix>cm</span>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Age" [(ngModel)]="userInfo.age" autocomplete="off">
+            <span matSuffix>years</span>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Select your activity</mat-label>
+            <mat-select [(value)]="userInfo.trainingFactor" required>
+                <div *ngFor="let option of trainingFactors">
+                    <mat-option (click)="updateUserInfo()" value="{{option.value}}">{{option.value}}/{{option.description}}</mat-option>
+                </div>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Calorie intake" [(ngModel)]="userInfo.calorieIntake" autocomplete="off">
+            <span matSuffix>kcal</span>
+        </mat-form-field>
+    </div>
+</div>
+<div class="floating-buttons">
+    <button mat-fab class=" floating-button d-inline d-lg-none "><i
+            class="material-icons ">info</i></button>
+</div>

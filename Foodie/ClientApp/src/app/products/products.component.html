@@ -1,22 +1,53 @@
-<p>Products</p>
+<h1 class="text-center mb-3">Products</h1>
+<div class="container">
 
-<p *ngIf="!products"><em>Loading...</em></p>
+    <p *ngIf="!products"><em>Loading...</em></p>
 
-<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="products">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Protein</th>
-            <th>Fat</th>
-            <th>Carbs</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let product of products">
-            <td>{{ product.name }}</td>
-            <td>{{ product.protein }}</td>
-            <td>{{ product.fat }}</td>
-            <td>{{ product.carbs }}</td>
-        </tr>
-    </tbody>
-</table>
+    <mat-table *ngIf="products" [dataSource]="products" class="mat-elevation-z8">
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Name. </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="calories">
+            <mat-header-cell *matHeaderCellDef> Calories </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.calories}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="carbs">
+            <mat-header-cell *matHeaderCellDef> Carbs </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.carbs}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="fat">
+            <mat-header-cell *matHeaderCellDef> Fat </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.fat}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="protein">
+            <mat-header-cell *matHeaderCellDef> Protein </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.protein}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="delete">
+            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <button mat-icon-button #deleteButton (click)="onDelete(element.id, deleteButton)"><mat-icon>delete</mat-icon></button>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+</div>
+<mat-chip-list class="d-none d-lg-inline">
+    <div class="floating-buttons">
+        <mat-chip class="floating-button-large" [routerLink]='["/mealcalendar"]'><i class=" material-icons ">calendar_today</i>Manage meals</mat-chip>
+        <mat-chip class="floating-button-large" (click)="addProduct()"><i class=" material-icons ">add</i> Add new product </mat-chip>
+    </div>
+</mat-chip-list>
+
+<div class="floating-buttons">
+    <button mat-fab class=" floating-button d-inline d-lg-none " [routerLink]='["/mealcalendar"]'><i
+            class="material-icons ">calendar_today</i></button>
+    <button mat-fab class=" floating-button d-inline d-lg-none " (click)="addProduct()"><i class="material-icons " >add</i></button>
+</div>

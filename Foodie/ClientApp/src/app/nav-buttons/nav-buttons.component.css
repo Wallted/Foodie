@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.button {
+    background: -webkit-linear-gradient(#0cebeb, #20e3b2, #29ffc6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    width: 3rem;
+}
+
+:host .mat-button-toggle-group {
+    border-radius: 20px !important;
+}

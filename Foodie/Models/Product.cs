@@ -9,5 +9,6 @@
         public double Fat { get; set; }
         public double Carbs { get; set; }
         public bool IsLiquid { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }

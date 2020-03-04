@@ -8,9 +8,9 @@
         </button>
     </div>
     <div *ngIf="fetchingData" class="center mt-5">
-        <mat-spinner [diameter]="360"></mat-spinner>
+        <mat-spinner [diameter]="180"></mat-spinner>
     </div>
-    <div *ngIf="!fetchingData">
+    <div class="mb-5" *ngIf="!fetchingData">
         <mat-accordion>
             <mat-expansion-panel *ngFor="let meal of meals; let i = index" #exp [style.background-color]="meal.panelColor">
                 <mat-expansion-panel-header [expandedHeight]="'80px'" [collapsedHeight]="'70px'" [style.background-color]="meal.panelColor">
@@ -23,7 +23,7 @@
                         </button>
                     </mat-panel-title>
                     <mat-panel-description class="date">
-                        <span></span>
+
                         <div class="container">
                             Meal no. {{i+1}}
                         </div>
@@ -51,7 +51,7 @@
                             <div class="d-none d-sm-block">Kcal</div>
                             <div class="d-block d-sm-none">Kc</div>
                         </mat-header-cell>
-                        <mat-cell *matCellDef="let element"> {{element.calories}} </mat-cell>
+                        <mat-cell *matCellDef="let element"> {{element.product.calories*element.quantity/100}} </mat-cell>
                     </ng-container>
                     <ng-container matColumnDef="quantity">
                         <mat-header-cell *matHeaderCellDef>
@@ -108,8 +108,22 @@
                     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
                 </mat-table>
                 <button mat-button (click)="addIngriedient(meal)" class="mt-3">Add new ingriedient</button>
+                <!-- <mat-form-field>
+                    <input matInput placeholder="Portions" [(ngModel)]="meal.portions">
+                </mat-form-field>
+                {{meal.portions}} -->
             </mat-expansion-panel>
-            <button mat-fab class="floating-button" (click)="addMeal()"><i class="material-icons">add</i></button>
         </mat-accordion>
     </div>
+</div>
+<mat-chip-list class="d-none d-lg-inline">
+    <div class="floating-buttons">
+        <mat-chip class="floating-button-large" [routerLink]='["/products"]' disableRipple><i class=" material-icons ">list</i>Manage products</mat-chip>
+        <mat-chip class="floating-button-large" (click)="addMeal()" disableRipple><i class=" material-icons ">add</i> Add new meal </mat-chip>
+    </div>
+</mat-chip-list>
+
+<div class="floating-buttons">
+    <button mat-fab class=" floating-button d-inline d-lg-none " [routerLink]='["/products"]'><i class="material-icons ">list</i></button>
+    <button mat-fab class=" floating-button d-inline d-lg-none " (click)="addMeal() "><i class="material-icons ">add</i></button>
 </div>
