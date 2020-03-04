@@ -1,5 +1,6 @@
 <body (swipeLeft)="onSwipeLeft($event)" (swipeRight)="onSwipeRight($event)">
     <app-nav-menu></app-nav-menu>
+    <app-nav-buttons></app-nav-buttons>
     <div [@routeAnimations]="prepareRoute(outlet)">
         <router-outlet #outlet="outlet"></router-outlet>
     </div>

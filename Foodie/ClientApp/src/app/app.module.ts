@@ -32,7 +32,12 @@ import {MatChipsModule} from '@angular/material/chips';
 import { ProductDialogComponent } from './product-dialog/product-dialog.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
-
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MealsCountExceededSnackBarComponent } from './meal-calendar/meals-count-exceeded-snack-bar/meals-count-exceeded-snack-bar.component';
+import { NavButtonsComponent } from './nav-buttons/nav-buttons.component';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 
 export class MyHammerConfig extends HammerGestureConfig {
@@ -55,7 +60,9 @@ export class MyHammerConfig extends HammerGestureConfig {
     IngriedientDialogComponent,
     DataComponent,
     StartingComponent,
-    ProductDialogComponent
+    ProductDialogComponent,
+    MealsCountExceededSnackBarComponent,
+    NavButtonsComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -84,11 +91,15 @@ export class MyHammerConfig extends HammerGestureConfig {
     MatIconModule,
     MatChipsModule,
     MatRadioModule,
-    MatSelectModule
+    MatSelectModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    MatSnackBarModule,
+    MatButtonToggleModule
   ],
   entryComponents: [
     IngriedientDialogComponent,
-    ProductDialogComponent
+    ProductDialogComponent,
+    MealsCountExceededSnackBarComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },

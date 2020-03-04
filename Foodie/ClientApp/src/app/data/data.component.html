@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="form mt-3" (change)="updateUserInfo()" *ngIf="userInfo">
+    <div class="form mt-4" (change)="updateUserInfo()" *ngIf="userInfo">
         <mat-radio-group class="mb-3" [(ngModel)]="userInfo.isMan" (click)="updateUserInfo()">
             <mat-radio-button class="float-left" [value]="true">Man</mat-radio-button>
             <mat-radio-button value="false" [value]="false">Woman</mat-radio-button>

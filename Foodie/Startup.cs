@@ -57,7 +57,7 @@ namespace Foodie
             services.AddAuthentication()
                 .AddIdentityServerJwt().AddJwtBearer(options =>
                 {
-                    options.Authority = "http://46.101.125.72/";
+                    options.Authority = "https://walltedo.com/";
                 });
             services.AddControllersWithViews().AddNewtonsoftJson(x => {
                 x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
@@ -70,6 +70,13 @@ namespace Foodie
                 configuration.RootPath = "ClientApp/dist";
             });
 
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 6;
+            });
         }
         public void ApplyMigrations(ApplicationDbContext context)
         {

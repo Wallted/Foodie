@@ -1,1 +1,5 @@
-<p>{{ message | async }}</p>
+<div class="container mt-5">
+    <p class="text-center mb-5">{{ message | async }}</p>
+    <button mat-button [routerLink]='["/"]' class="mb-3">Starting page</button>
+    <button mat-button [routerLink]='["/authentication/login"]' class="mb-3">Sign in again</button>
+</div>

@@ -13,6 +13,8 @@ namespace Foodie.Services
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly IDayDataService _dataService;
+
+        private int mealTreshold = 5;
         public MealsService(ApplicationDbContext applicationDbContext, IDayDataService dayDataService)
         {
             _dbContext = applicationDbContext;
@@ -20,6 +22,8 @@ namespace Foodie.Services
         }
         public int AddMeal(Meal meal, string userId)
         {
+            if (_dbContext.Meals.Include(m => m.User).Where(m => m.User.Id == userId && m.Date.CompareTo(meal.Date)==0 ).ToList().Count >= mealTreshold)
+                return -2;
             var user = _dbContext.Users.FirstOrDefault(x => x.Id == userId);
             meal.User = user;
             _dbContext.Meals.Add(meal);

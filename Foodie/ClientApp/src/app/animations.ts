@@ -57,9 +57,10 @@ const slideLeft = [
 export const slideInAnimation =
   trigger('routeAnimations', [
     transition('HomePage => MealsPage', slideLeft),
-    transition('DataPage => HomePage', slideLeft),
-    transition('MealsPage => HomePage', slideRight),
     transition('HomePage => DataPage' ,  slideRight),
+    transition('DataPage => HomePage', slideLeft),
+    transition('DataPage => MealsPage', slideLeft),
+    transition('MealsPage => HomePage', slideRight),
     transition('MealsPage => DataPage' ,  slideRight)
   ]);
 

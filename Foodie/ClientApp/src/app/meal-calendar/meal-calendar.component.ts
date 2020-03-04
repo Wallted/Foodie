@@ -6,6 +6,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { IngriedientDialogComponent } from '../ingriedient-dialog/ingriedient-dialog.component';
 import { MealsService } from '../services/meals.service';
 import { MatExpansionPanel } from '@angular/material/expansion';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MealsCountExceededSnackBarComponent } from './meals-count-exceeded-snack-bar/meals-count-exceeded-snack-bar.component';
 
 @Component({
   selector: 'app-meal-calendar',
@@ -19,7 +21,7 @@ export class MealCalendarComponent implements OnInit {
 
   displayedColumns: string[] = ['name', 'calories', 'quantity', 'protein', 'fat', 'carb', 'delete'];
 
-  constructor(public dialog: MatDialog, public mealService: MealsService) {
+  constructor(public dialog: MatDialog, public mealService: MealsService, private _snackBar: MatSnackBar) {
     this.getData()
   }
 
@@ -51,8 +53,12 @@ export class MealCalendarComponent implements OnInit {
   addMeal() {
     var color = this.getRandomColor();
     var meal: Meal = { id: 0, name: "", date: this.day, ingriedients: new Array<Ingriedient>(), panelColor: this.getPanelColor(color), tableColor: this.getTableColor(color), deleteForbid: true, portions: 1 };
-    this.meals.push(meal)
     this.mealService.addMeal(meal).subscribe((result) => {
+      if(result == -2){
+        this.mealsTresholdExceeded();
+        return;
+      }
+      this.meals.push(meal)
       meal.deleteForbid = false;
       meal.id = result;
     });
@@ -108,5 +114,14 @@ export class MealCalendarComponent implements OnInit {
     this.mealService.deleteIngriedient(ingriedientId).subscribe((result) => {
       // this.getData();
     })
+  }
+
+  private durationInSeconds = 5;
+  mealsTresholdExceeded(){
+    this._snackBar.openFromComponent(MealsCountExceededSnackBarComponent, {
+      duration: this.durationInSeconds * 1000,
+      verticalPosition: "bottom",
+      panelClass: "snackbar"
+    });
   }
 }

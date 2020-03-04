@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Foodie.Data;
 using Foodie.Models;
@@ -22,13 +23,15 @@ namespace Foodie.Controllers
         [HttpGet]
         public ActionResult<Product> GetAll()
         {
-            return Ok(_productsService.GetAllProducts());
+            var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.NameIdentifier).FirstOrDefault().Value;
+            return Ok(_productsService.GetAllProducts(userId));
         }
 
         [HttpPost]
         public int Add([FromBody] Product product)
         {
-            return _productsService.AddProduct(product);
+            var userId = User.Claims.Where(claim => claim.Type == ClaimTypes.NameIdentifier).FirstOrDefault().Value;
+            return _productsService.AddProduct(product, userId);
         }
 
         [HttpDelete("{controller}/{action}/{productId}")]
