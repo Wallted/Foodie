@@ -24,5 +24,18 @@ Foodie is a Progressive Web Application (PWA) developed in **.NetCore 3.0** as b
 
 ## Nginx -->
 
+## Localhost SSL (Chrome)
+
+In order to trust app locally, cert **nginx/localhost.crt** need to be trusted.
+
+### Windows
+
+Double click -> Install certificate and insert it in *Trusted Root Certification Authorities* storage.
+
+### OSX
+Hit one command:
+
+`sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain nginx/localhost.crt`
+
 
 #### Grzegorz Choiński 2020
