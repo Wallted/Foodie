@@ -22,7 +22,7 @@ namespace Foodie.Services
         }
         public int AddMeal(Meal meal, string userId)
         {
-            if (_dbContext.Meals.Include(m => m.User).Where(m => m.User.Id == userId && m.Date.CompareTo(meal.Date)==0 ).ToList().Count >= mealTreshold)
+            if (_dbContext.Meals.Include(m => m.User).Where(m => m.User.Id == userId && m.Date.Date.CompareTo(meal.Date.Date) == 0).ToList().Count >= mealTreshold)
                 return -2;
             var user = _dbContext.Users.FirstOrDefault(x => x.Id == userId);
             meal.User = user;

@@ -10,6 +10,7 @@ services:
 
   db:
     container_name: mssql_db
+    user: root
     image: "mcr.microsoft.com/mssql/server"
     ports:
       - "1433:1433"
@@ -17,14 +18,18 @@ services:
       SA_PASSWORD: "Your_password123"
       ACCEPT_EULA: "Y"
     volumes:
-      - D:\Projects\AspNetProjects\Foodie\mysqldata:/var/opt/mssql/data
+      - mssql-data:/var/opt/mssql/data
 
   reverseproxy:
     build:
       context: ./nginx
       dockerfile: Nginx.Dockerfile
+    depends_on:
+      - kestrel
     ports:
       - "80:80"
       - "443:443"
-    depends_on:
-      - kestrel
+
+volumes:
+  mssql-data:
+    driver: local
