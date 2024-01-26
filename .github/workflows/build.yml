@@ -38,4 +38,4 @@ jobs:
       run: npm i
     
     - name: Run build:ci command
-      run: npm run build:ci
+      run: npm run build
