@@ -39,12 +39,12 @@
     </mat-table>
 
 </div>
-<mat-chip-list class="d-none d-lg-inline">
+<mat-chip-listbox class="d-none d-lg-inline">
     <div class="floating-buttons">
-        <mat-chip class="floating-button-large" [routerLink]='["/mealcalendar"]'><i class=" material-icons ">calendar_today</i>Manage meals</mat-chip>
-        <mat-chip class="floating-button-large" (click)="addProduct()"><i class=" material-icons ">add</i> Add new product </mat-chip>
+        <mat-chip-option class="floating-button-large" [routerLink]='["/mealcalendar"]'><i class=" material-icons ">calendar_today</i>Manage meals</mat-chip-option>
+        <mat-chip-option class="floating-button-large" (click)="addProduct()"><i class=" material-icons ">add</i> Add new product </mat-chip-option>
     </div>
-</mat-chip-list>
+</mat-chip-listbox>
 
 <div class="floating-buttons">
     <button mat-fab class=" floating-button d-inline d-lg-none " [routerLink]='["/mealcalendar"]'><i
