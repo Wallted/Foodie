@@ -19,7 +19,9 @@ jobs:
 
   build-npm:
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: ./Foodie/ClientApp
     strategy:
       matrix:
         node-version: [14.x, 16.x, 18.x]
