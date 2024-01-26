@@ -39,3 +39,12 @@ jobs:
     
     - name: Run build command
       run: npm run build-prod
+
+  build-docker:
+    needs: [build-dotnet, build-npm]
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --file Foodie/Dockerfile --tag foodie:$(date +%s)
