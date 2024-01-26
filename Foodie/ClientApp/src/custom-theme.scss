@@ -6,14 +6,15 @@
 @include mat.core();
 @include mat.strong-focus-indicators();
 
-$my-primary: mat.define-palette(mat.$indigo-palette, 500);
-$my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$Foodie-primary: mat.define-palette(mat.$indigo-palette, 500);
+$Foodie-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$Foodie-warn: mat.define-palette(mat.$red-palette);
 
 $my-theme: mat.define-light-theme((
  color: (
    primary: $Foodie-primary,
    accent: $Foodie-accent,
-   warn: $Foodie-warb,
+   warn: $Foodie-warn,
  )
 ));
 
