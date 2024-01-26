@@ -32,8 +32,11 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Build
-      run: |
-        cd Foodie/ClientApp
-        npm install
-        grunt
+    - name: Run npm i
+      run: npm i
+
+    - name: Run test:ci command
+      run: npm run test:ci
+    
+    - name: Run build:ci command
+      run: npm run build:ci
