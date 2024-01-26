@@ -96,11 +96,6 @@ export class MyHammerConfig extends HammerGestureConfig {
     MatSnackBarModule,
     MatButtonToggleModule
   ],
-  entryComponents: [
-    IngriedientDialogComponent,
-    ProductDialogComponent,
-    MealsCountExceededSnackBarComponent
-  ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true },
     { provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig, },

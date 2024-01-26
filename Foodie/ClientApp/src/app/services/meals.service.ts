@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Meal } from '../models/meal';
 import { DatePipe } from '@angular/common';
-import { debug } from 'util';
 import { Ingriedient } from '../models/ingiedient';
 import { Macro } from '../models/macro';
 
