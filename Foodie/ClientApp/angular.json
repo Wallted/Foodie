@@ -14,7 +14,6 @@
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
                         "progress": true,
-                        "extractCss": true,
                         "outputPath": "dist",
                         "index": "src/index.html",
                         "main": "src/main.ts",
@@ -27,7 +26,7 @@
                         "styles": [
                             "src/custom-theme.scss",
                             "node_modules/bootstrap/dist/css/bootstrap.min.css",
-                            "src/styles.css"
+                            "src/styles.scss"
                         ],
                         "scripts": []
                     },
@@ -147,6 +146,5 @@
                 }
             }
         }
-    },
-    "defaultProject": "Foodie"
+    }
 }

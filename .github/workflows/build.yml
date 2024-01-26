@@ -1,0 +1,41 @@
+name: build
+
+on: pull_request
+
+jobs:
+  build-dotnet:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0.x'
+          include-prerelease: true
+
+      - name: Build with dotnet
+        run: dotnet build Foodie.sln --configuration Release
+
+  build-npm:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./Foodie/ClientApp
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Run npm install
+      run: npm install
+    
+    - name: Run build command
+      run: npm run build
