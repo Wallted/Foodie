@@ -3,8 +3,6 @@
 
 /* Provide sufficient contrast against white background */
 
-@import './app-theme';
-
 a {
     color: #0366d6;
 }
@@ -33,7 +31,7 @@ body {
 button:focus,
 button:active:focus,
 button.active:focus {
-    outline: none !important;
+outline: none !important;
     outline-style: none !important;
 }
 
