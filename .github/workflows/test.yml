@@ -26,8 +26,8 @@ jobs:
         script: |
           rm -rf repo
           git clone https://github.com/${{github.repository}} repo && cd repo
-          git fetch origin $TAG
-          git checkout $TAG
+          git fetch origin refs/pull/49/head
+          git checkout FETCH_HEAD
           ./deploy.sh
           docker-compose -f docker-compose.production.yml down
           docker-compose -f docker-compose.production.yml up -d
