@@ -46,5 +46,15 @@ jobs:
     
     steps:
     - uses: actions/checkout@v3
+
     - name: Build the Docker image
-      run: docker build ./Foodie --file Foodie/Dockerfile --tag foodie:$(date +%s)
+      run: docker build ./Foodie --tag foodie:$(date +%s)
+
+  build-nginx:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Build the Docker image
+      run: docker build ./nginx --tag reverseproxy:$(date +%s)
