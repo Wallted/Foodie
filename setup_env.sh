@@ -2,10 +2,10 @@
 
 rm -rf .env
 echo TAG=$TAG >> .env
-echo REGISTRY=$REGISTRY >> .env
 echo IMAGE_NAME=$IMAGE_NAME >> .env
-echo CERT_KEY=$CERT_KEY >> .env
-echo CERT_FULLCHAIN=$CERT_FULLCHAIN >> .env
+echo DOCKER_REGISTRY=$DOCKER_REGISTRY >> .env
+echo CERT_PATH=$CERT_PATH >> .env
+echo CERT_KEY_PATH=$CERT_KEY_PATH >> .env
 
 rm -rf .nginx
 mkdir .nginx

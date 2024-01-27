@@ -5,7 +5,7 @@ on: pull_request
 env:
   TAG: v0.0.1
   IMAGE_NAME: ${{ vars.IMAGE_NAME }}
-  REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
+  DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
 
 jobs:
   deploy:
@@ -15,8 +15,8 @@ jobs:
     - name: clone and docker compose up
       uses: appleboy/ssh-action@master
       env:
-        CERT_KEY: ${{ secrets.CERT_KEY_PATH }}
-        CERT_FULLCHAIN: ${{ secrets.CERT_PATH }}
+        CERT_PATH: ${{ secrets.CERT_PATH }}
+        CERT_KEY_PATH: ${{ secrets.CERT_KEY_PATH }}
         PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
         CERTIFICATE: ${{ secrets.CERTIFICATE }}
         NGINX_CONF: ${{ secrets.NGINX_CONF }}
@@ -24,7 +24,7 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
-        envs: TAG,IMAGE_NAME,REGISTRY,CERT_KEY,CERT_FULLCHAIN,PRIVATE_KEY,CERTIFICATE,NGINX_CONF
+        envs: TAG,IMAGE_NAME,DOCKER_REGISTRY,CERT_PATH,CERT_KEY_PATH,PRIVATE_KEY,CERTIFICATE,NGINX_CONF
         script: |
           rm -rf repo
           git clone https://github.com/${{github.repository}} repo && cd repo

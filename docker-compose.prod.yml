@@ -3,7 +3,7 @@ version: "3.7"
 services:
   kestrel:
     container_name: foodie
-    image: "${REGISTRY}/${IMAGE_NAME}:${TAG}"
+    image: "${DOCKER_REGISTRY}/${IMAGE_NAME}:${TAG}"
     depends_on:
       - db
     restart: always
@@ -28,8 +28,8 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ${PWD}/.nginx/privkey.pem:${CERT_KEY}
-      - ${PWD}/.nginx/fullchain.pem:${CERT_FULLCHAIN}
+      - ${PWD}/.nginx/fullchain.pem:${CERT_PATH}
+      - ${PWD}/.nginx/privkey.pem:${CERT_KEY_PATH}
       - ${PWD}/.nginx/nginx.conf:/etc/nginx/nginx.conf:ro
 
 volumes:
