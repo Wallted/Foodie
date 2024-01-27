@@ -7,10 +7,8 @@ env:
   IMAGE_NAME: ${{ vars.IMAGE_NAME }}
 
 jobs:
-
   deploy:
     runs-on: ubuntu-latest
-    needs: [publish-dotnet]
 
     steps:
     - name: clone and docker compose up
