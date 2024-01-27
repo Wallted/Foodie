@@ -28,8 +28,8 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ${PWD}/.nginx/fullchain.pem:${CERT_PATH}
-      - ${PWD}/.nginx/privkey.pem:${CERT_KEY_PATH}
+      - ${PWD}/.nginx/fullchain.pem:${CERT_PATH}:ro
+      - ${PWD}/.nginx/privkey.pem:${CERT_KEY_PATH}:ro
       - ${PWD}/.nginx/nginx.conf:/etc/nginx/nginx.conf:ro
 
 volumes:
