@@ -64,6 +64,6 @@ jobs:
         DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
         DOCKER_HUB_PASS: ${{ secrets.DOCKER_HUB_PASS }}
       run: |
-        docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_USER
+        docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASS
         docker tag reverseproxy:${GITHUB_SHA::7} $DOCKER_HUB_USER/reverseproxy:${GITHUB_SHA::7}
         docker push $DOCKER_HUB_USER/reverseproxy:${GITHUB_SHA::7}
