@@ -5,6 +5,7 @@ on: pull_request
 env:
   TAG: v0.0.1
   IMAGE_NAME: ${{ vars.IMAGE_NAME }}
+  REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
 
 jobs:
   deploy:
@@ -23,7 +24,7 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
-        envs: TAG,IMAGE_NAME,CERT_KEY,CERT_FULLCHAIN,PRIVATE_KEY,CERTIFICATE,NGINX_CONF
+        envs: TAG,IMAGE_NAME,REGISTRY,CERT_KEY,CERT_FULLCHAIN,PRIVATE_KEY,CERTIFICATE,NGINX_CONF
         script: |
           rm -rf repo
           git clone https://github.com/${{github.repository}} repo && cd repo
