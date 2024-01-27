@@ -23,6 +23,7 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
+        envs: TAG,IMAGE_NAME,CERT_KEY,CERT_FULLCHAIN,PRIVATE_KEY,CERTIFICATE,NGINX_CONF
         script: |
           rm -rf repo
           git clone https://github.com/${{github.repository}} repo && cd repo
