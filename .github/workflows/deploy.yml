@@ -1,9 +1,6 @@
 name: deploy
 
-on:
-  push:
-    tags:
-      - 'v*.*.*'
+on: pull_request
 
 env:
   IMAGE_NAME: ${{ env.IMAGE_NAME }}
