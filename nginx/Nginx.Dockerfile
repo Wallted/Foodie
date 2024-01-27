@@ -1,5 +1,4 @@
 FROM nginx:latest
 
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY localhost.crt /etc/ssl/certs/localhost.crt
-COPY localhost.key /etc/ssl/private/localhost.key
+RUN apt-get update
+RUN apt-get install -y certbot python-certbot-nginx
