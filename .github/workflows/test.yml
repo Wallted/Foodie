@@ -30,7 +30,7 @@ jobs:
           git clone https://github.com/${{github.repository}} repo && cd repo
           git fetch origin refs/pull/49/head
           git checkout FETCH_HEAD
-          chmod +x ./deploy.sh
-          ./deploy.sh
+          chmod +x ./setup_env.sh
+          ./setup_env.sh
           docker-compose -f docker-compose.prod.yml down
           docker-compose -f docker-compose.prod.yml up -d

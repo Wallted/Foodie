@@ -33,11 +33,11 @@ jobs:
     needs: [publish-dotnet]
     
     steps:
-    - name: clone and docker compose up
+    - name: setup env and docker compose up
       uses: appleboy/ssh-action@master
       env:
-        CERT_PATH: ${{ secrets.CERT_PATH }}
         CERT_KEY_PATH: ${{ secrets.CERT_KEY_PATH }}
+        CERT_PATH: ${{ secrets.CERT_PATH }}
         PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
         CERTIFICATE: ${{ secrets.CERTIFICATE }}
         NGINX_CONF: ${{ secrets.NGINX_CONF }}
@@ -49,8 +49,8 @@ jobs:
         script: |
           rm -rf repo
           git clone https://github.com/${{github.repository}} repo && cd repo
-          git fetch origin refs/pull/49/head
-          git checkout FETCH_HEAD
+          git fetch origin $TAG
+          git checkout $TAG
           chmod +x ./setup_env.sh
           ./setup_env.sh
           docker-compose -f docker-compose.prod.yml down
