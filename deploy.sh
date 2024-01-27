@@ -10,6 +10,6 @@ echo CERT_FULLCHAIN=$CERT_FULLCHAIN >> .env
 rm -rf .nginx
 mkdir .nginx
 cd .nginx
-echo $PRIVATE_KEY > privkey.pem
-echo $CERTIFICATE > fullchain.pem
-echo $NGINX_CONF > nginx.conf
+echo "$PRIVATE_KEY" > privkey.pem
+echo "$CERTIFICATE" > fullchain.pem
+echo "$NGINX_CONF" > nginx.conf

@@ -15,8 +15,8 @@ jobs:
     - name: clone and docker compose up
       uses: appleboy/ssh-action@master
       env:
-        CERT_KEY: ${{ secrets.CERT_KEY }}
-        CERT_FULLCHAIN: ${{ secrets.CERT_FULLCHAIN }}
+        CERT_KEY: ${{ secrets.CERT_KEY_PATH }}
+        CERT_FULLCHAIN: ${{ secrets.CERT_PATH }}
         PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
         CERTIFICATE: ${{ secrets.CERTIFICATE }}
         NGINX_CONF: ${{ secrets.NGINX_CONF }}
