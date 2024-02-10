@@ -1,7 +1,12 @@
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container">
-            <a class="navbar-brand" [routerLink]="['/']">Foodie</a>
+            <div>
+                <a class="navbar-brand" [routerLink]="['/']">
+                    Foodie
+                    <span class="version" *ngIf="version">&nbsp;|&nbsp;{{version}}</span>
+                </a>
+            </div>
             <app-login-menu></app-login-menu>
         </div>
     </nav>
