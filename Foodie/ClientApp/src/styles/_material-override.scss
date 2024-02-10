@@ -1,0 +1,11 @@
+.transparent-button {
+    --mat-mdc-focus-indicator-border-color: none;
+    --mat-focus-indicator-border-color: none;
+}
+
+.transparent-button .mdc-button__label {
+    background: -webkit-linear-gradient(#0cebeb, #20e3b2, #29ffc6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
