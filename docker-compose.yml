@@ -7,15 +7,7 @@ services:
       context: ./Foodie
     depends_on:
       - db
-  angular:
-    container_name: angular
-    ports:
-      - 80:4200
-    build:
-      context: ./Foodie/ClientApp
-    volumes:
-      - ${PWD}/Foodie/ClientApp/:/app/
-      - /app/node_modules
+
   db:
     container_name: mssql_db
     user: root
