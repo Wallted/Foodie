@@ -1,9 +1,6 @@
 <div class="container">
     <h1 class="text-center header mt-5"><b>Welcome!</b></h1>
     <h1 class="text-justify mt-4">This app will help you control your weight by managing your meals and tracking calorie intake. Add favorite products, create meals, supervise nutrition. </h1>
-    <a class="mt-4" [routerLink]='["/authentication/register"]' [state]='{ local: true }' title="Register"><button
-        mat-button>Sign up now!
-    </button></a>
-    <a class="mt-4" [routerLink]='["/authentication/login"]' [state]='{ local: true }' title="Login"><button mat-button >Sign in
-    </button></a>
+    <a mat-button class="mt-4 transparent-button" [routerLink]='["/authentication/register"]' [state]='{ local: true }' title="Register">Sign up now!</a>
+    <a mat-button class="mt-4 transparent-button" [routerLink]='["/authentication/login"]' [state]='{ local: true }' title="Login">Sign in</a>
 </div>

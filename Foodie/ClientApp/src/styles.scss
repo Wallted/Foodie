@@ -1,10 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
-
 /* Provide sufficient contrast against white background */
 
-a {
-    color: #0366d6;
+@import 'styles/material-override';
+
+a:hover {
+    text-decoration: none;
 }
 
 code {
@@ -31,7 +32,7 @@ body {
 button:focus,
 button:active:focus,
 button.active:focus {
-outline: none !important;
+    outline: none !important;
     outline-style: none !important;
 }
 
@@ -39,7 +40,6 @@ outline: none !important;
 .mat-spinner circle {
     stroke: #20e3b2 !important;
 }
-
 
 /* FLOATING BUTTONS */
 
