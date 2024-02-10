@@ -5,6 +5,8 @@ services:
     container_name: foodie
     build:
       context: ./Foodie
+      args:
+        APP_VERSION: "dev"
     depends_on:
       - db
 

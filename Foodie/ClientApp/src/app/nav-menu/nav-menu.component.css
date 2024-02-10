@@ -21,3 +21,9 @@ html {
 nav {
     background: linear-gradient(to right, #0cebeb, #20e3b2, #29ffc6);
 }
+
+.version {
+    margin: 0;
+    font-size: x-small;
+    color: #fff;
+}
